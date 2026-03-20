@@ -138,29 +138,48 @@
     </div>
   </div>
 
-  <p>
-    Our robot successfully completed the main required track tasks, including line following,
-    turning, wall interaction, and navigation through the printed course. The only task we did
-    not complete was the bonus cup-pushing objective. Our official run time was exactly
-    2 minutes.
-  </p>
-
-  <p>
-    The final system performed best when line sensing, encoder feedback, and state-estimation
-    logic were working together. Although the cup bonus was not completed, the robot was able
-    to finish the main path and demonstrate the core goals of the project. This result reflects
-    the integration of the major subsystems developed throughout the quarter into one working
-    Romi platform.
-  </p>
-
   <figure class="media-card">
-    <img src="images/game-track.png" alt="ME405 term project game track" />
+    <img src="https://i.imgur.com/mQRiPmc.png" alt="ME405 term project game track" />
     <figcaption>
       Printed course used during the final demonstration, including the straightaway,
       garage wall section, slalom, turnaround, and bonus cup areas.
     </figcaption>
   </figure>
 </section>
+
+  <p>
+    Our robot successfully completed the main required tasks of the final track, including line
+    following, turning, wall interaction, and overall path navigation. The only portion of the
+    course we did not complete was the bonus cup-pushing task. Our official completion time for
+    the track was exactly 2 minutes.
+  </p>
+
+  <p>
+    In our motor tuning and control development, the best step-response behavior came from using
+    a proportional gain of <strong>Kp = 0.1</strong> and an integral gain of
+    <strong>Ki = 1.0</strong>. With this tuning, the motor response rose quickly with relatively
+    low oscillation, and the measured velocity reached approximately
+    <strong>7000 counts/s</strong>. Our controller also allowed the motor setpoint to be adjusted
+    through the user interface, and our final robot was run using a velocity target of
+    <strong>[INSERT FINAL SETPOINT HERE] counts/s</strong>.
+  </p>
+
+  <p>
+    One major challenge in tuning the robot was that changing the control values often caused
+    unpredictable motor behavior. Small adjustments to the gains or the setpoint could make the
+    response less stable, less repeatable, or more difficult to control during the full track run.
+    Because of this, once we found a set of values that gave acceptable performance, we tried to
+    keep them consistent rather than continue making aggressive tuning changes right before the
+    demonstration.
+  </p>
+    
+  <p>
+    Overall, the robot demonstrated the successful integration of the major subsystems developed
+    throughout the quarter. Even though the cup task was not completed, the robot was still able
+    to perform the core navigation tasks required by the project and complete the track within the
+    official time limit.
+  </p>
+  
 
 <section id="code" class="card">
   <h2>Code / Software Architecture</h2>
