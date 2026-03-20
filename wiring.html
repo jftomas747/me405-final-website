@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ME405 Final Project - MECH13 | Wiring</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <aside class="sidebar">
+      <div class="sidebar-title">
+        <h1>ME405 Final Project</h1>
+        <p>MECH13</p>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="index.html">Overview</a>
+        <a href="hardware.html">Hardware</a>
+        <a class="active" href="wiring.html">Wiring</a>
+        <a href="diagrams.html">FSMs &amp; Diagrams</a>
+        <a href="code.html">Source Code</a>
+        <a href="results.html">Results</a>
+        <a href="video.html">Video Demo</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <header class="doc-header">
+        <h1>Wiring</h1>
+        <p class="subtitle">Electrical integration and final pin assignments</p>
+      </header>
+
+      <section class="doc-section">
+        <h2>Wiring Diagram</h2>
+        <figure class="doc-figure">
+          <img src="PASTE_WIRING_DIAGRAM_IMAGE_LINK_HERE" alt="Romi wiring diagram" />
+          <figcaption>Wiring diagram for the final Romi build.</figcaption>
+        </figure>
+      </section>
+
+      <section class="doc-section">
+        <h2>Power</h2>
+        <ul>
+          <li>VIN — battery power input</li>
+          <li>GND — common ground</li>
+        </ul>
+      </section>
+
+      <section class="doc-section">
+        <h2>Motors and Encoders</h2>
+
+        <h3>Right Motor</h3>
+        <ul>
+          <li>PB6</li>
+          <li>PA7</li>
+          <li>PA6</li>
+        </ul>
+
+        <h3>Left Motor</h3>
+        <ul>
+          <li>PB4</li>
+          <li>PB5</li>
+          <li>PB3</li>
+        </ul>
+
+        <h3>Right Encoder</h3>
+        <ul>
+          <li>PA1</li>
+          <li>PA0</li>
+        </ul>
+
+        <h3>Left Encoder</h3>
+        <ul>
+          <li>PA8</li>
+          <li>PA9</li>
+        </ul>
+      </section>
+
+      <section class="doc-section">
+        <h2>Line Sensor</h2>
+        <ul>
+          <li>PC3</li>
+          <li>PC2</li>
+          <li>PC0</li>
+          <li>PC1</li>
+          <li>PB0</li>
+          <li>PA4</li>
+          <li>PC4</li>
+          <li>GND</li>
+          <li>3V3</li>
+        </ul>
+      </section>
+
+      <section class="doc-section">
+        <h2>IMU</h2>
+        <ul>
+          <li>SCL — PB9</li>
+          <li>SDA — PB8</li>
+          <li>GND</li>
+          <li>3V3</li>
+        </ul>
+      </section>
+
+      <section class="doc-section">
+        <h2>Bump Sensors</h2>
+        <ul>
+          <li>Right bumper — PB15, PB14, PB13</li>
+          <li>Left bumper — PC8, PC6, PC5</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
