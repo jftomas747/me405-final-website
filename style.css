@@ -1,63 +1,133 @@
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  background: #f4f4f4;
-  color: #222;
+  background: #f6f7f3;
+  color: #1f1f1f;
+  line-height: 1.6;
 }
 
-header {
-  background: #16324f;
-  color: white;
+.site-header {
+  background: #2f6b2f;
+  color: #f4d03f;
+  padding: 48px 20px;
   text-align: center;
-  padding: 40px 20px;
+  border-bottom: 6px solid #d4af37;
+}
+
+.header-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.site-header h1 {
+  margin: 0 0 10px 0;
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.site-header p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #f7dc6f;
+}
+
+.site-nav {
+  background: #ffffff;
+  text-align: center;
+  padding: 14px 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.site-nav a {
+  display: inline-block;
+  margin: 0 10px;
+  text-decoration: none;
+  color: #2f6b2f;
+  font-weight: 600;
+}
+
+.site-nav a:hover {
+  color: #1f4d1f;
 }
 
 main {
-  max-width: 900px;
-  margin: 30px auto;
-  padding: 0 20px;
+  max-width: 1000px;
+  margin: 32px auto;
+  padding: 0 20px 40px;
 }
 
-section {
-  background: white;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+.card {
+  background: #ffffff;
+  padding: 28px;
+  margin-bottom: 24px;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
 }
 
-h1, h2 {
+h2 {
+  margin-top: 0;
+  color: #2f6b2f;
+  border-bottom: 2px solid #e3e7dc;
+  padding-bottom: 8px;
+}
+
+h3 {
+  color: #2b2b2b;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+p {
   margin-top: 0;
 }
 
 a {
-  color: #0b5ed7;
+  color: #1f5fbf;
 }
 
-#overview,
-#hardware {
-  background: white;
-  padding: 24px;
-  margin-bottom: 24px;
+a:hover {
+  color: #154a92;
+}
+
+.image-wrap {
+  margin: 20px 0 24px;
+  text-align: center;
+}
+
+.image-wrap img {
+  max-width: 100%;
+  height: auto;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
-#hardware h3 {
-  margin-top: 20px;
-}
-
-#hardware ul {
+.hardware-list,
+.support-files ul {
   padding-left: 20px;
 }
 
-#hardware li {
+.hardware-list li,
+.support-files li {
   margin-bottom: 8px;
 }
 
-.hardware-image img {
-  max-width: 100%;
-  border-radius: 10px;
-  display: block;
-  margin-top: 16px;
+@media (max-width: 700px) {
+  .site-header h1 {
+    font-size: 1.9rem;
+  }
+
+  .site-nav a {
+    margin: 6px 8px;
+  }
+
+  .card {
+    padding: 20px;
+  }
 }
