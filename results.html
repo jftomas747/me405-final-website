@@ -27,46 +27,173 @@
     <main class="content">
       <header class="doc-header">
         <h1>Results</h1>
-        <p class="subtitle">Final performance and control discussion</p>
+        <p class="subtitle">Official time-trial performance and control discussion</p>
       </header>
 
       <section class="doc-section">
-        <h2>Track Performance</h2>
+        <h2>Time Trials</h2>
 
         <div class="stats">
           <div class="stat">
-            <span class="stat-label">Main Track Completion</span>
-            <span class="stat-value">Completed</span>
+            <span class="stat-label">Best Official Time</span>
+            <span class="stat-value">120.00 s</span>
           </div>
           <div class="stat">
-            <span class="stat-label">Official Time</span>
-            <span class="stat-value">2:00</span>
+            <span class="stat-label">Best Overall Run</span>
+            <span class="stat-value">119.31 s</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Official Finish Rate</span>
+            <span class="stat-value">1 / 3</span>
           </div>
         </div>
 
         <p>
-          Our robot successfully completed the main required tasks of the final track, including
-          line following, turning, wall interaction, and overall path navigation. The final system
-          depended on the interaction between line sensing, encoder-based motion control, and
-          inertial/state estimation during transitions where simple line following alone was not enough.
+          The time trials were used to evaluate our robot under the final course scoring rules.
+          Our goal was not only to achieve a fast run, but also to demonstrate that the robot
+          could complete the course consistently using the sensing, encoder feedback, and control
+          logic developed throughout the project.
         </p>
 
         <p>
-          In our motor tuning and control development, the best performance came from using
-          <strong>Kp = 2.9</strong>, <strong>Ki = 0.1</strong>, a motor gain of
-          <strong>K = 0.2</strong>, and a set point of <strong>S = 120 counts/s</strong>.
+          Based on the official attempts, our best counted result was
+          <strong>120.00 seconds</strong>. We also recorded an additional full run of
+          <strong>119.31 seconds</strong>, but that run was marked <strong>unofficial</strong>.
+          Overall, the data shows that the robot was capable of finishing the course near the
+          two-minute mark, but repeatability remained one of the main challenges.
         </p>
+      </section>
+
+      <section class="doc-section">
+        <h2>Official Trial Results</h2>
 
         <p>
-          One major challenge in tuning the robot was that changing the control values often caused
-          unpredictable motor behavior. Small adjustments to the gains or the set point could make
-          the response less stable, less repeatable, or more difficult to control during the final run.
+          The table below summarizes the recorded checkpoint times from the trial sheet.
+          DNF indicates that the robot did not finish the remaining course segments.
         </p>
+
+        <div class="table-wrap">
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th>Trial</th>
+                <th>Checkpoint 1 (s)</th>
+                <th>Checkpoint 2 (s)</th>
+                <th>Checkpoint 3 (s)</th>
+                <th>Checkpoint 4 (s)</th>
+                <th>Finish (s)</th>
+                <th>Official Time (s)</th>
+                <th>Counted</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>29.28</td>
+                <td>60.01</td>
+                <td>85.20</td>
+                <td>100.10</td>
+                <td>120.00</td>
+                <td>120.00</td>
+                <td><span class="pill yes">Yes</span></td>
+                <td>Successful official full-course run</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>30.00</td>
+                <td>DNF</td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+                <td>DNF</td>
+                <td><span class="pill yes">Yes</span></td>
+                <td>Run ended before checkpoint 2</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>30.00</td>
+                <td>DNF</td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+                <td>DNF</td>
+                <td><span class="pill yes">Yes</span></td>
+                <td>Run ended before checkpoint 2</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>30.00</td>
+                <td>61.08</td>
+                <td>85.16</td>
+                <td>100.10</td>
+                <td>119.31</td>
+                <td>119.31</td>
+                <td><span class="pill no">No</span></td>
+                <td>Fastest complete run, but not official</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
         <figure class="doc-figure">
-          <img src="https://i.imgur.com/mQRiPmc.png" alt="ME405 final project game track" />
-          <figcaption>Printed course used during the final demonstration.</figcaption>
+          <img src="images/official-time-trial.png" alt="Official MECH13 time trial spreadsheet" />
+          <figcaption>Official time-trial sheet for MECH13.</figcaption>
         </figure>
+      </section>
+
+      <section class="doc-section">
+        <h2>Summary of Performance</h2>
+
+        <div class="callout">
+          <p><strong>Trial 1:</strong> Successful official run with a final time of <strong>120.00 s</strong>.</p>
+          <p><strong>Trial 2:</strong> DNF after reaching checkpoint 1 at <strong>30.00 s</strong>.</p>
+          <p><strong>Trial 3:</strong> DNF after reaching checkpoint 1 at <strong>30.00 s</strong>.</p>
+          <p><strong>Trial 4:</strong> Successful full run in <strong>119.31 s</strong>, but not counted as official.</p>
+        </div>
+
+        <p>
+          One useful observation from the successful runs is that the middle checkpoint times were
+          very consistent. Trial 1 and Trial 4 both reached checkpoint 3 at about
+          <strong>85.2 seconds</strong> and checkpoint 4 at <strong>100.10 seconds</strong>.
+          This suggests that once the robot settled into the course properly, its path following
+          and state transitions were reasonably repeatable.
+        </p>
+
+        <p>
+          The larger issue was reliability across attempts. Two of the three official runs did not
+          progress beyond the early portion of the course, which means our design could produce a
+          full completion but still needed improved robustness. In other words, the robot had the
+          speed needed for a competitive result, but not yet the consistency needed for every run.
+        </p>
+      </section>
+
+      <section class="doc-section">
+        <h2>Control Discussion</h2>
+
+        <p>
+          Our best motor-control performance came from using
+          <strong>Kp = 2.9</strong>, <strong>Ki = 0.1</strong>,
+          motor gain <strong>K = 0.2</strong>, and a setpoint of
+          <strong>120 counts/s</strong>.
+          These values gave the most stable balance between response speed and tracking accuracy
+          during the final testing phase.
+        </p>
+
+        <p>
+          A major challenge during tuning was that small gain changes often produced noticeably
+          different behavior. In some cases, slight adjustments caused the robot to become less
+          stable or less repeatable, especially during transitions between sections of the course.
+          Because of this sensitivity, tuning became a tradeoff between achieving fast motion and
+          maintaining enough stability to finish the run.
+        </p>
+
+        <p>
+          The results page reflects that tradeoff clearly. The robot demonstrated that it could
+          complete the course in about two minutes, but the DNF trials show that future improvement
+          should focus on making performance more repeatable rather than only trying to reduce the
+          final time.
+        </p>
       </section>
     </main>
   </div>
