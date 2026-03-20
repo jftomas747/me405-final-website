@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ME405 Final Project - MECH13 | Hardware</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <aside class="sidebar">
+      <div class="sidebar-title">
+        <h1>ME405 Final Project</h1>
+        <p>MECH13</p>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="index.html">Overview</a>
+        <a class="active" href="hardware.html">Hardware</a>
+        <a href="wiring.html">Wiring</a>
+        <a href="diagrams.html">FSMs &amp; Diagrams</a>
+        <a href="code.html">Source Code</a>
+        <a href="results.html">Results</a>
+        <a href="video.html">Video Demo</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <header class="doc-header">
+        <h1>Hardware</h1>
+        <p class="subtitle">Base platform, added sensors, and mechanical layout</p>
+      </header>
+
+      <section class="doc-section">
+        <h2>Base Platform</h2>
+        <p>
+          Our robot was built on the standard Romi platform used throughout the course. The core
+          hardware stack included the Romi chassis with motors, encoders, wheels, and casters,
+          along with a Nucleo L476RG, a modified Shoe of Brian, and a BNO055 IMU breakout board.
+        </p>
+      </section>
+
+      <section class="doc-section">
+        <h2>Added Sensors and Components</h2>
+        <p>
+          To support autonomous track navigation, we added a QTRX-MD-07A 7-channel analog reflectance
+          sensor array and left/right bumper switch assemblies. These sensors allowed the robot to
+          follow the printed track while also detecting wall contact during navigation.
+        </p>
+      </section>
+
+      <section class="doc-section">
+        <h2>Mechanical Layout</h2>
+        <p>
+          The line sensor was mounted near the front underside of the robot using stand-offs so it
+          could read the track close to the ground. The bumper switches were mounted at the front
+          so they would contact the wall before the line sensor or front hardware made impact.
+          The IMU was incorporated into the robot stack to support heading estimation during turns.
+        </p>
+
+        <figure class="doc-figure">
+          <img
+            src="https://github.com/user-attachments/assets/59b8538a-9f08-433e-8024-1bff118f0d29"
+            alt="Photo of our Romi robot"
+          />
+          <figcaption>Physical layout of the final Romi build.</figcaption>
+        </figure>
+      </section>
+
+      <section class="doc-section">
+        <h2>Hardware List and Product Links</h2>
+        <ul>
+          <li><a href="https://www.pololu.com/product/3500" target="_blank" rel="noopener noreferrer">Pololu Romi Chassis Kit</a></li>
+          <li><a href="https://www.pololu.com/product/4447" target="_blank" rel="noopener noreferrer">Pololu QTRX-MD-07A Reflectance Sensor Array</a></li>
+          <li><a href="https://www.pololu.com/product/3673" target="_blank" rel="noopener noreferrer">Pololu Left Bumper Switch Assembly</a></li>
+          <li><a href="https://www.pololu.com/product/3674" target="_blank" rel="noopener noreferrer">Pololu Right Bumper Switch Assembly</a></li>
+        </ul>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
