@@ -13,13 +13,25 @@
         <h1>ME405 Final Project</h1>
         <p>MECH13</p>
       </div>
+
       <nav class="sidebar-nav">
         <a href="index.html">Overview</a>
         <a href="hardware.html">Hardware</a>
         <a href="wiring.html">Wiring</a>
         <a href="diagrams.html">FSMs &amp; Diagrams</a>
         <a href="code.html">Source Code</a>
-        <a class="active" href="results.html">Results</a>
+
+        <div class="nav-group">
+          <a class="active" href="results.html">Results</a>
+          <div class="sidebar-subnav">
+            <a href="#time-trials">Time Trials</a>
+            <a href="#official-trial-results">Official Trial Results</a>
+            <a href="#summary-of-performance">Summary of Performance</a>
+            <a href="#control-discussion">Control Discussion</a>
+            <a href="#video-demo">Video Demo</a>
+          </div>
+        </div>
+
         <a href="video.html">Video Demo</a>
       </nav>
     </aside>
@@ -27,10 +39,10 @@
     <main class="content">
       <header class="doc-header">
         <h1>Results</h1>
-        <p class="subtitle">Official time-trial performance and final control discussion</p>
+        <p class="subtitle">Official time-trial performance, control discussion, and final demonstration video</p>
       </header>
 
-      <section class="doc-section">
+      <section class="doc-section" id="time-trials">
         <h2>Time Trials</h2>
 
         <div class="stats">
@@ -60,7 +72,7 @@
         </p>
       </section>
 
-      <section class="doc-section">
+      <section class="doc-section" id="official-trial-results">
         <h2>Official Trial Results</h2>
 
         <p>
@@ -69,7 +81,7 @@
         </p>
 
         <div class="table-wrap">
-          <table class="doc-table">
+          <table class="doc-table results-table">
             <thead>
               <tr>
                 <th>Trial</th>
@@ -144,7 +156,7 @@
         </div>
       </section>
 
-      <section class="doc-section">
+      <section class="doc-section" id="summary-of-performance">
         <h2>Summary of Performance</h2>
 
         <h3>Trial 1</h3>
@@ -176,7 +188,7 @@
         </p>
       </section>
 
-      <section class="doc-section">
+      <section class="doc-section" id="control-discussion">
         <h2>Control Discussion</h2>
 
         <p>
@@ -198,6 +210,18 @@
           Overall, the results show that our robot was capable of finishing the course in about
           two minutes, but future improvement should focus on increasing reliability and consistency
           across repeated runs rather than only trying to reduce the final time.
+        </p>
+      </section>
+
+      <section class="doc-section" id="video-demo">
+        <h2>Video Demo</h2>
+        <p>
+          The completed Romi robot demonstration can be viewed at the link below.
+        </p>
+        <p>
+          <a class="repo-button" href="https://youtu.be/V55OzWEsSkU" target="_blank" rel="noopener noreferrer">
+            Watch on YouTube
+          </a>
         </p>
       </section>
     </main>
