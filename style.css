@@ -333,7 +333,69 @@ a:hover {
   margin-top: 20px;
 }
 
-/* Wiring-specific pin coloring */
+/* Exact wire-color classes */
+
+.pin-red {
+  background: #ff0000;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.pin-black {
+  background: #000000;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.pin-yellow {
+  background: #ffff00;
+  color: #000000;
+  font-weight: 700;
+}
+
+.pin-blue {
+  background: #00b0f0;
+  color: #000000;
+  font-weight: 700;
+}
+
+.pin-green {
+  background: #00b050;
+  color: #000000;
+  font-weight: 700;
+}
+
+.pin-orange {
+  background: #ffc000;
+  color: #000000;
+  font-weight: 700;
+}
+
+.pin-brown {
+  background: #a65e2e;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.pin-gray {
+  background: #bfbfbf;
+  color: #000000;
+  font-weight: 700;
+}
+
+.pin-purple {
+  background: #cc66cc;
+  color: #000000;
+  font-weight: 700;
+}
+
+.pin-white {
+  background: #ffffff;
+  color: #000000;
+  font-weight: 700;
+}
+
+/* Old classes kept for compatibility if any are still in your HTML */
 
 .pin-power {
   background: #ffd9d9;
@@ -370,7 +432,7 @@ a:hover {
   font-weight: 700;
 }
 
-/* Optional legend styling if you add one later */
+/* Optional legend */
 
 .color-legend {
   display: flex;
@@ -396,33 +458,16 @@ a:hover {
   display: inline-block;
 }
 
-.legend-power {
-  background: #ffd9d9;
-}
-
-.legend-ground {
-  background: #e6e6e6;
-}
-
-.legend-motor {
-  background: #d9ead3;
-}
-
-.legend-encoder {
-  background: #cfe2ff;
-}
-
-.legend-line {
-  background: #fff2cc;
-}
-
-.legend-imu {
-  background: #ead1ff;
-}
-
-.legend-bump {
-  background: #d9f2f2;
-}
+.legend-red { background: #ff0000; }
+.legend-black { background: #000000; }
+.legend-yellow { background: #ffff00; }
+.legend-blue { background: #00b0f0; }
+.legend-green { background: #00b050; }
+.legend-orange { background: #ffc000; }
+.legend-brown { background: #a65e2e; }
+.legend-gray { background: #bfbfbf; }
+.legend-purple { background: #cc66cc; }
+.legend-white { background: #ffffff; }
 
 /* Responsive */
 
