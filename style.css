@@ -2,6 +2,10 @@ html {
   scroll-behavior: smooth;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -109,28 +113,17 @@ a:hover {
 }
 
 .hardware-list,
-.support-files ul {
+.support-files ul,
+.code-card ul {
   padding-left: 20px;
 }
 
 .hardware-list li,
-.support-files li {
+.support-files li,
+.code-card li {
   margin-bottom: 8px;
 }
 
-@media (max-width: 700px) {
-  .site-header h1 {
-    font-size: 1.9rem;
-  }
-
-  .site-nav a {
-    margin: 6px 8px;
-  }
-
-  .card {
-    padding: 20px;
-  }
-}
 .results-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -195,15 +188,6 @@ a:hover {
   color: #2f6b2f;
 }
 
-.code-card ul {
-  padding-left: 18px;
-  margin-bottom: 0;
-}
-
-.code-card li {
-  margin-bottom: 6px;
-}
-
 .repo-link {
   margin-top: 24px;
   text-align: center;
@@ -221,11 +205,26 @@ a:hover {
 
 .repo-link a:hover {
   background: #255625;
+  color: #f4d03f;
 }
 
 @media (max-width: 800px) {
   .results-grid,
   .code-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .site-header h1 {
+    font-size: 1.9rem;
+  }
+
+  .site-nav a {
+    margin: 6px 8px;
+  }
+
+  .card {
+    padding: 20px;
   }
 }
