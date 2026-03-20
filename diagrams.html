@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ME405 Final Project - MECH13 | FSMs and Diagrams</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <aside class="sidebar">
+      <div class="sidebar-title">
+        <h1>ME405 Final Project</h1>
+        <p>MECH13</p>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="index.html">Overview</a>
+        <a href="hardware.html">Hardware</a>
+        <a href="wiring.html">Wiring</a>
+        <a class="active" href="diagrams.html">FSMs &amp; Diagrams</a>
+        <a href="code.html">Source Code</a>
+        <a href="results.html">Results</a>
+        <a href="video.html">Video Demo</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <header class="doc-header">
+        <h1>FSMs and Diagrams</h1>
+        <p class="subtitle">Task structure and state-based behavior</p>
+      </header>
+
+      <section class="doc-section">
+        <h2>System Diagrams and Finite State Machines</h2>
+        <p>
+          The diagrams below summarize the software architecture used in our robot. They show how
+          user interaction, motor control, line sensing, IMU sensing, state estimation, and
+          navigation were split into separate behaviors that worked together during operation.
+        </p>
+
+        <div class="diagram-grid">
+          <figure class="diagram-card">
+            <img src="https://i.imgur.com/QOvlA8q.png" alt="Updated task diagram" />
+            <figcaption><strong>Updated Task Diagram</strong></figcaption>
+          </figure>
+
+          <figure class="diagram-card">
+            <img src="https://i.imgur.com/yzKMSLF.png" alt="User interface FSM" />
+            <figcaption><strong>User Interface FSM</strong></figcaption>
+          </figure>
+
+          <figure class="diagram-card">
+            <img src="https://i.imgur.com/ePfqqhg.png" alt="Left motor FSM" />
+            <figcaption><strong>Left Motor &amp; Encoder FSM</strong></figcaption>
+          </figure>
+
+          <figure class="diagram-card">
+            <img src="https://i.imgur.com/olAPql0.png" alt="Right motor FSM" />
+            <figcaption><strong>Right Motor &amp; Encoder FSM</strong></figcaption>
+          </figure>
+
+          <figure class="diagram-card">
+            <img src="https://i.imgur.com/aP0xOx3.png" alt="Line sensor FSM" />
+            <figcaption><strong>Line Sensor FSM</strong></figcaption>
+          </figure>
+
+          <figure class="diagram-card">
+            <img src="https://i.imgur.com/ivEkiWK.png" alt="State estimation FSM" />
+            <figcaption><strong>State Estimation FSM</strong></figcaption>
+          </figure>
+
+          <figure class="diagram-card">
+            <img src="https://i.imgur.com/Zuo3DSG.png" alt="IMU FSM" />
+            <figcaption><strong>IMU FSM</strong></figcaption>
+          </figure>
+
+          <figure class="diagram-card">
+            <img src="https://i.imgur.com/gnvW9in.png" alt="Navigator state diagram" />
+            <figcaption><strong>Navigator State Diagram</strong></figcaption>
+          </figure>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
