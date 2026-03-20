@@ -13,6 +13,7 @@
         <h1>ME405 Final Project</h1>
         <p>MECH13</p>
       </div>
+
       <nav class="sidebar-nav">
         <a href="index.html">Overview</a>
         <a href="hardware.html">Hardware</a>
@@ -27,16 +28,31 @@
     <main class="content">
       <header class="doc-header">
         <h1>FSMs and Diagrams</h1>
-        <p class="subtitle">Task structure and state-based behavior</p>
+        <p class="subtitle">Task structure, shared variables, and state-based robot behavior</p>
       </header>
 
       <section class="doc-section">
         <h2>System Diagrams and Finite State Machines</h2>
         <p>
-          The diagrams below summarize the software architecture used in our robot. They show how
-          user interaction, motor control, line sensing, IMU sensing, state estimation, and
-          navigation were split into separate behaviors that worked together during operation.
+          This page documents the software structure used in our Romi robot during the final project.
+          Our program was organized as a cooperative multitasking system, where separate tasks handled
+          user interaction, motor control, bump sensing, state estimation, and navigation. The task
+          diagram shows how those modules interact, while the FSM diagrams show how each major behavior
+          changes state during a run.
         </p>
+
+        <p>
+          The goal of this structure was to keep the code modular and readable while still allowing the
+          robot to perform sensing, control, and navigation at the same time. Rather than placing all
+          behavior inside one large loop, each subsystem was given a specific role and communicated
+          through shared variables.
+        </p>
+
+        <div class="note-box">
+          <strong>Important note:</strong> the diagrams below are explained using our actual final code.
+          Some diagrams represent continuous control logic rather than large multi-state behaviors, so
+          the descriptions here are based on what each module really does in software.
+        </div>
 
         <div class="diagram-grid">
           <figure class="diagram-card">
@@ -66,12 +82,12 @@
 
           <figure class="diagram-card">
             <img src="https://i.imgur.com/ivEkiWK.png" alt="State estimation FSM" />
-            <figcaption><strong>State Estimation FSM</strong></figcaption>
+            <figcaption><strong>State Estimation / Observer</strong></figcaption>
           </figure>
 
           <figure class="diagram-card">
             <img src="https://i.imgur.com/Zuo3DSG.png" alt="IMU FSM" />
-            <figcaption><strong>IMU FSM</strong></figcaption>
+            <figcaption><strong>IMU Support Logic</strong></figcaption>
           </figure>
 
           <figure class="diagram-card">
@@ -79,6 +95,351 @@
             <figcaption><strong>Navigator State Diagram</strong></figcaption>
           </figure>
         </div>
+      </section>
+
+      <section class="doc-section">
+        <h2>System Architecture Overview</h2>
+        <h3>Task Diagram</h3>
+
+        <figure class="doc-figure">
+          <img src="https://i.imgur.com/QOvlA8q.png" alt="Updated task diagram" />
+          <figcaption>
+            System task diagram showing the interaction between user commands, sensing, estimation,
+            motor control, and navigation.
+          </figcaption>
+        </figure>
+
+        <p>
+          The task diagram represents the full software architecture used on the robot. At startup,
+          the main program initializes the motors, encoders, line sensors, bump sensors, I2C bus,
+          and IMU, then creates the motor, bump, observer, navigator, and user tasks before running
+          them under the cooperative scheduler.
+        </p>
+
+        <p>
+          The lower-level tasks interact directly with hardware. The motor tasks update encoder data
+          and apply PWM effort to the motors. The bump task monitors the bumper inputs and publishes
+          a bitmask when contact occurs. The line sensor object provides centroid and line-detection
+          data for line following, while the IMU provides heading and angular-rate information.
+        </p>
+
+        <p>
+          Above these hardware-facing modules, the observer task estimates robot motion states such
+          as traveled distance and heading, and the navigator task uses those estimates to decide what
+          the robot should do next. In this way, navigation does not directly drive hardware. Instead,
+          it changes setpoints and mode behavior, which keeps the overall control structure easier to
+          understand and debug.
+        </p>
+      </section>
+
+      <section class="doc-section">
+        <h2>Individual Task and FSM Descriptions</h2>
+
+        <h3>User Interface FSM</h3>
+        <figure class="doc-figure">
+          <img src="https://i.imgur.com/yzKMSLF.png" alt="User interface FSM" />
+          <figcaption>User interface FSM for setup, calibration, mission start, and parameter entry.</figcaption>
+        </figure>
+
+        <p>
+          The user task acts as the operator interface over USB serial. It begins in an initialization
+          state where it prints the help menu, then moves into a command state where it listens for
+          single-character inputs. From that command mode, the operator can start or stop the mission,
+          calibrate the line sensor, and update parameters such as base speed, line-following gains,
+          and motor gains.
+        </p>
+
+        <p>
+          In addition to normal command handling, the user task includes explicit white and black
+          calibration states for the reflectance sensor array. This is important because the line
+          sensor driver normalizes readings using separately stored white and black calibration values,
+          and accurate line following depends on those references being captured before the run.
+        </p>
+
+        <p>
+          Overall, this FSM separates setup behavior from autonomous behavior. It gives the operator a
+          controlled way to prepare the robot, adjust tuning constants, and launch the run without
+          mixing those actions into the rest of the navigation logic.
+        </p>
+
+        <h3>Left Motor and Encoder FSM</h3>
+        <figure class="doc-figure">
+          <img src="https://i.imgur.com/ePfqqhg.png" alt="Left motor FSM" />
+          <figcaption>Left motor and encoder FSM used for low-level drivetrain control.</figcaption>
+        </figure>
+
+        <p>
+          The left motor task is one of two nearly identical low-level drivetrain tasks. It starts in
+          an initialization state where the encoder is zeroed, the motor is disabled, and the effort
+          output is reset. It then waits for the run flag before entering its active control state.
+        </p>
+
+        <p>
+          In the run state, the task updates the encoder, computes wheel velocity, compares that
+          measured velocity to the shared setpoint, and applies a proportional effort based on the
+          motor gain. The output is saturated so effort remains within valid bounds, and the task
+          continuously publishes both motor effort and wheel distance for the rest of the system.
+        </p>
+
+        <p>
+          This task provides the direct connection between the control logic and the left motor
+          hardware. Because the robot depends on balanced left and right wheel response, the behavior
+          of this task strongly affects heading stability and line-following quality.
+        </p>
+
+        <h3>Right Motor and Encoder FSM</h3>
+        <figure class="doc-figure">
+          <img src="https://i.imgur.com/olAPql0.png" alt="Right motor FSM" />
+          <figcaption>Right motor and encoder FSM used for the other side of the drivetrain.</figcaption>
+        </figure>
+
+        <p>
+          The right motor task has the same basic structure as the left motor task: initialize, wait,
+          and run. During operation it updates the right encoder, computes the wheel velocity, compares
+          that velocity to the requested setpoint, and applies saturated effort to the right motor
+          driver.
+        </p>
+
+        <p>
+          Although the left and right tasks are structurally similar, they are both necessary because
+          a differential-drive robot depends on independent wheel control. Straight motion, line
+          tracking, and heading-based turns all require the two sides of the drivetrain to respond
+          predictably and with good symmetry.
+        </p>
+
+        <p>
+          Together, the two motor tasks form the lowest active control layer of the robot. Higher-level
+          logic does not write PWM directly. Instead, it changes the left and right setpoints, and the
+          motor tasks convert those setpoints into actual wheel motion.
+        </p>
+
+        <h3>Line Sensor FSM</h3>
+        <figure class="doc-figure">
+          <img src="https://i.imgur.com/aP0xOx3.png" alt="Line sensor FSM" />
+          <figcaption>Line sensor logic for calibration, reflectance reading, and centroid estimation.</figcaption>
+        </figure>
+
+        <p>
+          The line sensor module provides the feedback needed for most of the course. It stores white
+          and black calibration values, reads the analog reflectance sensors, normalizes those readings,
+          and computes useful outputs such as line strength, line visibility, dot detection, and line
+          centroid.
+        </p>
+
+        <p>
+          The most important quantity for steering is the centroid. This value estimates where the line
+          is relative to the sensor array, allowing the navigator’s line-following controller to add
+          opposite corrections to the left and right wheel setpoints. The driver also provides a line
+          visibility threshold and a dark-count threshold, which are used to detect dots or special
+          course regions.
+        </p>
+
+        <p>
+          Even though the line sensor is not scheduled as a separate task in the main file, it behaves
+          like an independent sensing subsystem. It is queried by the user task during calibration and
+          by the navigator during autonomous motion, making it one of the most important inputs in the
+          system.
+        </p>
+
+        <h3>State Estimation / Observer</h3>
+        <figure class="doc-figure">
+          <img src="https://i.imgur.com/ivEkiWK.png" alt="State estimation FSM" />
+          <figcaption>Observer-based state estimation for distance, heading, and robot position.</figcaption>
+        </figure>
+
+        <p>
+          The state estimation logic in our final code is implemented as an observer task. Unlike the
+          user or motor tasks, this behavior does not use a large multi-state structure. Instead, it
+          runs continuously in a single loop and updates the estimated motion state each time it is
+          scheduled.
+        </p>
+
+        <p>
+          The observer reads the motor effort shares, left and right wheel distance shares, and IMU yaw
+          and yaw-rate measurements. It initializes the state estimate once, then repeatedly calls the
+          estimator model to update the estimated traveled distance and heading. From those states it
+          also integrates an estimated robot position in the plane.
+        </p>
+
+        <p>
+          This estimated state is extremely important for navigation because the robot does not rely on
+          tape alone. The navigator uses estimated distance and heading to decide when to stop, when to
+          drive forward a fixed amount, when to turn ninety degrees, and when to begin later segments
+          of the course.
+        </p>
+
+        <h3>IMU Support Logic</h3>
+        <figure class="doc-figure">
+          <img src="https://i.imgur.com/Zuo3DSG.png" alt="IMU FSM" />
+          <figcaption>IMU initialization and heading support logic used with the BNO055.</figcaption>
+        </figure>
+
+        <p>
+          The IMU portion of the system is built around the BNO055 on I2C. During startup, the program
+          configures the I2C pins, scans the bus for the IMU address, and then either loads stored
+          calibration data or waits until the sensor is fully calibrated before saving that data for
+          future runs.
+        </p>
+
+        <p>
+          After initialization, the IMU is placed into NDOF mode and used mainly as a heading source.
+          The IMU driver returns yaw in radians and yaw rate in radians per second, which are then used
+          by the observer and higher-level heading logic.
+        </p>
+
+        <p>
+          In other words, the IMU is not a separate scheduled task in the final program, but it still
+          behaves as a dedicated sensing subsystem. Its primary value is giving the robot a heading
+          reference that supplements encoder-based estimation during turning and orientation control.
+        </p>
+
+        <h3>Navigator State Diagram</h3>
+        <figure class="doc-figure">
+          <img src="https://i.imgur.com/gnvW9in.png" alt="Navigator state diagram" />
+          <figcaption>Top-level navigation FSM for checkpoint progression, wall interaction, and return path behavior.</figcaption>
+        </figure>
+
+        <p>
+          The navigator is the top-level decision-making task. It reads the estimated distance and
+          heading, checks line-sensor conditions and bump events, and then chooses the correct robot
+          behavior for the current part of the course. Rather than driving motors directly, it sets
+          shared left and right speed commands that the motor tasks track.
+        </p>
+
+        <p>
+          This FSM combines three major motion styles. In line-following states, it uses the sensor
+          centroid and PI correction to steer along the tape. In heading-hold states, it drives forward
+          while correcting heading based on the estimated orientation. In turning states, it commands
+          opposite wheel speeds until the robot reaches the desired heading window.
+        </p>
+
+        <p>
+          The navigator also contains the special-event logic for the box and wall portion of the
+          course. After reaching the first checkpoint distance, it stops briefly, drives forward a short
+          amount, turns right, drives toward the wall, waits for a bump event, backs up until the line
+          is seen again, and turns left to rejoin the course. Later, it detects the dark dot region,
+          drives through it for a short time, turns around, and line-follows back to the finish.
+        </p>
+
+        <h3>Navigator State-by-State Breakdown</h3>
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>State</th>
+                <th>Name</th>
+                <th>Main Behavior</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0</td>
+                <td>Wait</td>
+                <td>Robot stopped until auto-run is enabled.</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>CP0 to CP1</td>
+                <td>Line following from the start until checkpoint-distance threshold is reached.</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Box Stop</td>
+                <td>Short timed stop before entering the box sequence.</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Box Forward 100</td>
+                <td>Heading-hold forward motion for a fixed short distance.</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Turn Right</td>
+                <td>Turns approximately 90 degrees right using heading control.</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Drive to Wall</td>
+                <td>Drives straight toward the wall while holding heading.</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Backup to Line</td>
+                <td>Backs up until the line is detected again.</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>Turn Left to Line</td>
+                <td>Turns back toward the course to resume normal navigation.</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>CP2 to CP3</td>
+                <td>Line follows through the next main course segment.</td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>CP3 to Dot</td>
+                <td>Continues line following while searching for the dark-dot target.</td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>Hit Dot</td>
+                <td>Drives forward briefly through the dot region.</td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td>Turn Around</td>
+                <td>Performs an approximately 180-degree turn.</td>
+              </tr>
+              <tr>
+                <td>12</td>
+                <td>CP4 to Finish</td>
+                <td>Line follows the final return segment.</td>
+              </tr>
+              <tr>
+                <td>13</td>
+                <td>Finished</td>
+                <td>Stops the robot and clears the auto-run flag.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="doc-section">
+        <h2>How the Tasks Work Together</h2>
+        <p>
+          During a run, the user task is mainly used for mission start, stop, and parameter entry.
+          Once the mission begins, the navigator becomes the top-level coordinator. It uses line-sensor
+          information for normal path tracking, observer estimates for distance and heading decisions,
+          and bump-sensor information for wall interaction. The resulting left and right setpoints are
+          then sent to the motor tasks, which directly control the wheels.
+        </p>
+
+        <p>
+          This structure made the overall project easier to manage because each software module had a
+          clear purpose. The sensing modules measured the robot and course, the observer converted those
+          measurements into usable motion state information, the navigator selected what behavior should
+          happen next, and the motor tasks executed the requested motion at the wheel level.
+        </p>
+      </section>
+
+      <section class="doc-section">
+        <h2>Summary</h2>
+        <p>
+          The diagrams show that our final robot was not controlled by a single block of logic, but by
+          a layered software structure. The motor tasks handled low-level actuation, the sensor modules
+          provided environmental feedback, the observer supplied motion estimates, and the navigator
+          organized the robot’s strategy across the obstacle course.
+        </p>
+
+        <p>
+          This FSM-based and task-based organization was one of the most important parts of the final
+          design. It made the robot easier to debug, easier to tune, and much easier to explain,
+          especially when different parts of the course required different behaviors such as line
+          following, heading hold, wall interaction, and turnaround logic.
+        </p>
       </section>
     </main>
   </div>
