@@ -25,10 +25,10 @@ We installed a QTRX-MD-07A reflectance sensor array at the front underside of th
 For wiring, we used a common ground system. Board power was connected through VIN and GND. The right motor was wired to PA1 and PA0, and the left motor was wired to PA8 and PA9. The right encoder was connected to PB6, PA7, and PA6, while the left encoder was connected to PB4, PB5, and PB3. The line sensor was connected to PC3, PC2, PC0, PC1, PB0, PA4, PC4, GND, and 3V3. The IMU was connected through PB9 (SCL), PB8 (SDA), GND, and 3V3. The right bump sensor used PB15, PB14, and PB13, while the left bump sensor used PC8, PC6, and PC5.
 
 ## Photo of the Romi
-![Romi Robot](YOUR_IMAGE_LINK_HERE)
+![Romi Robot](https://github.com/user-attachments/assets/59b8538a-9f08-433e-8024-1bff118f0d29)
 
 ## Wiring Map
-[Wiring Map Excel File](YOUR_WIRING_FILE_LINK_HERE)
+[Wiring Map Excel File](https://cpslo-my.sharepoint.com/:x:/r/personal/ktguevar_calpoly_edu/Documents/FINAL_ROMI_WIRINGMAP.xlsx?d=wce03223d2b894929a85aa045309b94bb&csf=1&web=1&e=eps5Vk)
 
 ## Results
 During our demonstration, the robot completed the course successfully 1 out of 3 attempts. Before the official demonstration, it completed the course 3 times in a row. However, due to external issues, we had to make last-minute calibration adjustments that reduced consistency.
