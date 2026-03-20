@@ -13,6 +13,7 @@
         <h1>ME405 Final Project</h1>
         <p>MECH13</p>
       </div>
+
       <nav class="sidebar-nav">
         <a class="active" href="index.html">Overview</a>
         <a href="hardware.html">Hardware</a>
@@ -27,85 +28,149 @@
     <main class="content">
       <header class="doc-header">
         <h1>Overview</h1>
-        <p class="subtitle">Autonomous Romi Obstacle Course Robot</p>
+        <p class="subtitle">Autonomous Romi obstacle-course robot for the ME405 final project</p>
       </header>
 
       <section class="doc-section">
         <h2>Project Overview</h2>
         <p>
-          This project brought together the major sensing, actuation, and control systems developed
-          throughout ME405 into one autonomous Romi robot capable of navigating a printed obstacle
-          course. Our final robot combined closed-loop motor control, encoder feedback, line following,
-          bump sensing, inertial sensing, and observer-based state estimation into a single multitask
-          system.
+          In ME405 Mechatronics, our term project culminated in a fully integrated autonomous
+          two-wheeled differential-drive robot based on the Pololu Romi platform. Our team built a
+          complete mechatronic system that combined embedded hardware, real-time MicroPython
+          firmware, cooperative task scheduling, multi-sensor instrumentation, closed-loop motor
+          control, and observer-based state estimation into one final robot capable of navigating the
+          printed obstacle course.
         </p>
+
         <p>
-          Rather than relying on only one sensing method, our design used the strengths of several
-          subsystems together. The line sensor handled most of the path tracking, the encoders supported
-          motion control and distance-based actions, the bump sensors handled wall interaction, and the
-          IMU and state estimator improved heading awareness and motion prediction during turns and
-          transitions.
+          Our final Romi used a standard differential-drive base with motors and encoders, a Nucleo
+          L476RG running MicroPython, a modified Shoe of Brian interface board, a BNO055 IMU,
+          a QTRX-MD-07A analog reflectance sensor array, and front bumper switch assemblies. The
+          line sensor handled most of the path tracking, the encoders supported motion control and
+          distance-based actions, the bump sensors handled wall interaction, and the IMU with the
+          state estimator improved heading awareness and motion prediction during turns and transitions.
+          The result was a robot that demonstrated end-to-end capability in hardware integration,
+          embedded software design, controls, and navigation logic.
         </p>
-      </section>
 
-      <section class="doc-section">
-        <h2>Team Members</h2>
-        <ul>
-          <li>John Tomas</li>
-          <li>Kaden Guevarra</li>
-        </ul>
-      </section>
-
-      <section class="doc-section">
-        <h2>Robot Overview Image</h2>
         <figure class="doc-figure">
           <img
             src="https://github.com/user-attachments/assets/59b8538a-9f08-433e-8024-1bff118f0d29"
-            alt="Photo of our Romi robot"
+            alt="Isometric or angled view of the final Romi robot"
           />
-          <figcaption>Final Romi robot configuration used during the obstacle-course demonstration.</figcaption>
+          <figcaption>
+            Final Romi robot showing the integrated chassis layout and front-mounted sensor geometry
+            used for autonomous navigation.
+          </figcaption>
         </figure>
       </section>
 
       <section class="doc-section">
-        <h2>Documentation Pages</h2>
-        <div class="quick-grid">
-          <div class="quick-card">
-            <h3>Hardware</h3>
-            <p>Physical platform, added sensors, and mechanical layout.</p>
-            <a href="hardware.html">Open page</a>
-          </div>
+        <h2>Development Approach</h2>
+        <p>
+          Our development process emphasized modularity, repeatability, and progressive integration.
+          Rather than building one large monolithic program at the end, we developed reusable drivers
+          and subsystem tasks across the quarter, then combined them into the final robot. Individual
+          work on motor control, encoder measurement, line sensing, IMU communication, bump sensing,
+          and user interaction was gradually integrated into a larger cooperative multitask system.
+        </p>
 
-          <div class="quick-card">
-            <h3>Wiring</h3>
-            <p>Electrical integration and final pin assignments.</p>
-            <a href="wiring.html">Open page</a>
-          </div>
+        <p>
+          This approach made it easier to verify each subsystem separately before combining them into
+          the final navigation task. It also gave us a cleaner tuning workflow, since gains, thresholds,
+          and motion behaviors could be adjusted while keeping the rest of the architecture intact.
+        </p>
+      </section>
 
-          <div class="quick-card">
-            <h3>FSMs &amp; Diagrams</h3>
-            <p>Task diagram, finite state machines, and navigator state diagram.</p>
-            <a href="diagrams.html">Open page</a>
-          </div>
+      <section class="doc-section">
+        <h2>Software Architecture</h2>
+        <p>
+          Our software stack was designed to be modular, readable, and scalable from early bring-up
+          through final navigation. We implemented structured MicroPython code using classes for
+          hardware drivers and interfaces, functions for reusable logic, and generator-based tasks to
+          enforce periodic execution of each subsystem. Shared variables and queues provided clear
+          boundaries between sensing, estimation, control, and decision-making tasks under a
+          cooperative scheduler.
+        </p>
 
-          <div class="quick-card">
-            <h3>Source Code</h3>
-            <p>Organized links to the Python files used in the final project.</p>
-            <a href="code.html">Open page</a>
-          </div>
+        <p>
+          This organization allowed the robot to run line following, motor control, bump detection,
+          user interaction, IMU sensing, and estimation concurrently with predictable timing.
+          It also made debugging easier because each task had a specific responsibility and a defined
+          data interface. As a result, the navigation layer could remain focused on commanding
+          behaviors instead of directly managing low-level hardware details.
+        </p>
+      </section>
 
-          <div class="quick-card">
-            <h3>Results</h3>
-            <p>Track performance, control gains, and final discussion.</p>
-            <a href="results.html">Open page</a>
-          </div>
+      <section class="doc-section">
+        <h2>Hardware Integration</h2>
+        <p>
+          Our hardware work focused on building a reliable robot that could survive repeated testing
+          and final demonstration runs. We assembled the Romi drivetrain, integrated the Nucleo and
+          Shoe of Brian stack, wired the IMU over I2C, connected the analog line sensor array to the
+          controller, and added front-mounted bumper switches for wall contact detection. We also
+          used stand-offs and sensor mounting hardware to keep the reflectance sensor at an effective
+          height above the floor for repeatable measurements during line following.
+        </p>
 
-          <div class="quick-card">
-            <h3>Video Demo</h3>
-            <p>Final demonstration video for the completed Romi robot.</p>
-            <a href="video.html">Open page</a>
-          </div>
-        </div>
+        <p>
+          Clean wiring and practical sensor placement were important because the robot depended on
+          multiple sensing systems at once. The final hardware layout had to preserve visibility of the
+          line, protect the front sensor array, and support reliable access to encoder, bumper, and IMU
+          information during autonomous motion.
+        </p>
+      </section>
+
+      <section class="doc-section">
+        <h2>Navigation Objective</h2>
+        <p>
+          The culminating deliverable of the term was a navigation task built specifically for the final
+          obstacle course. During operation, the robot had to move through the course by switching
+          between line following, straight segments, distance-based moves, controlled turns, bump-based
+          wall interaction, and final alignment maneuvers. This required stable motor control
+          underneath the higher-level navigation logic at all times.
+        </p>
+
+        <p>
+          Our final navigation implementation used a structured finite-state approach to transition
+          between behaviors as the robot moved through the course. Instead of depending on a single
+          one-off run, the goal was to make the robot respond consistently to real track conditions
+          using calibrated sensing, distance estimates, heading information, and state-based decision
+          logic.
+        </p>
+
+        <figure class="doc-figure">
+          <img
+            src="https://i.imgur.com/mQRiPmc.png"
+            alt="Top view of the final obstacle course"
+          />
+          <figcaption>
+            Obstacle-course layout used for the final time-trial demonstration.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="doc-section">
+        <h2>Final Outcome</h2>
+        <p>
+          In the final demonstration, our robot successfully completed the main required course tasks
+          with an official runtime of exactly <strong>2:00</strong>. The completed system showed that we
+          were able to integrate sensing, control, estimation, and navigation into one functioning
+          embedded robot platform. Together, the pages on this site document the final hardware,
+          software, state machines, and results of the project.
+        </p>
+      </section>
+
+      <section class="doc-section">
+        <h2>Repository</h2>
+        <p>
+          Firmware and documentation for the project are available on GitHub.
+        </p>
+        <p>
+          <a class="repo-button" href="https://github.com/KadenGuevarra/ME405_Final_MECH13" target="_blank" rel="noopener noreferrer">
+            View GitHub Repository
+          </a>
+        </p>
       </section>
     </main>
   </div>
