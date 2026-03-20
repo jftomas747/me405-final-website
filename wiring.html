@@ -1,475 +1,491 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ME405 Final Project - MECH13 | Wiring</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ME405 Final Project - MECH13 | Wiring</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="page">
-    <aside class="sidebar">
-      <div class="sidebar-title">
-        <h1>ME405 Final Project</h1>
-        <p>MECH13</p>
-      </div>
+  <div class="page">
+    <aside class="sidebar">
+      <div class="sidebar-title">
+        <h1>ME405 Final Project</h1>
+        <p>MECH13</p>
+      </div>
 
-      <nav class="sidebar-nav">
-        <a href="index.html">Overview</a>
-        <a href="hardware.html">Hardware</a>
-        <a class="active" href="wiring.html">Wiring</a>
-        <a href="diagrams.html">FSMs &amp; Diagrams</a>
-        <a href="code.html">Source Code</a>
-        <a href="results.html">Results</a>
-        <a href="video.html">Video Demo</a>
-      </nav>
-    </aside>
+      <nav class="sidebar-nav">
+        <a href="index.html">Overview</a>
+        <a href="hardware.html">Hardware</a>
+        <a class="active" href="wiring.html">Wiring</a>
+        <a href="diagrams.html">FSMs &amp; Diagrams</a>
+        <a href="code.html">Source Code</a>
+        <a href="results.html">Results</a>
+        <a href="video.html">Video Demo</a>
+      </nav>
+    </aside>
 
-    <main class="content">
-      <header class="doc-header">
-        <h1>Wiring</h1>
-        <p class="subtitle">Electrical interconnects and Nucleo pin assignments for the final robot</p>
-      </header>
+    <main class="content">
+      <header class="doc-header">
+        <h1>Wiring</h1>
+        <p class="subtitle">Electrical interconnects and Nucleo pin assignments for the final robot</p>
+      </header>
 
-      <section class="doc-section">
-        <h2>Wiring Overview</h2>
-        <p>
-          This page defines the electrical interconnects used on our Romi robot, including motor
-          control, encoder feedback, reflectance sensing, inertial sensing, and bump-event inputs.
-          The goal is to provide a single reference for connector-level wiring, Nucleo pin assignments,
-          and the signals required by each subsystem in the final autonomous robot.
-        </p>
+      <section class="doc-section">
+        <h2>Wiring Overview</h2>
+        <p>
+          This page defines the electrical interconnects used on our Romi robot, including motor
+          driver control, encoder feedback, reflectance sensing, inertial sensing, and bump-event
+          inputs. The goal is to provide a single reference for connector-level wiring, Nucleo pin
+          assignments, and the signals required by each subsystem in the final autonomous robot.
+        </p>
 
-        <figure class="doc-figure">
-          <img src="pinout.png" alt="STM32 Nucleo pinout reference" />
-          <figcaption>
-            STM32 Nucleo pinout reference used to assign PWM, ADC, I2C, and digital I/O signals
-            for the Romi wiring harness.
-          </figcaption>
-        </figure>
-      </section>
+        <figure class="doc-figure">
+          <img src="PASTE_NUCLEO_PINOUT_IMAGE_LINK_HERE" alt="STM32 Nucleo pinout reference" />
+          <figcaption>
+            STM32 Nucleo pinout reference used to assign PWM, analog, I2C, and digital I/O signals
+            for the Romi wiring harness.
+          </figcaption>
+        </figure>
 
-      <section class="doc-section">
-        <h2>Nucleo Pin Constraints</h2>
-        <p>
-          Several Nucleo pins were avoided because they are tied to onboard functions such as ST-Link
-          communication, USB, SWD programming, the user button, the onboard LED, and the RTC oscillator.
-          Avoiding these pins preserved reliable programming, debugging, and serial access during
-          development and final testing.
-        </p>
+        <ul class="color-legend">
+          <li><span class="legend-swatch legend-red"></span> Red wire</li>
+          <li><span class="legend-swatch legend-black"></span> Black wire</li>
+          <li><span class="legend-swatch legend-yellow"></span> Yellow wire</li>
+          <li><span class="legend-swatch legend-blue"></span> Blue wire</li>
+          <li><span class="legend-swatch legend-green"></span> Green wire</li>
+          <li><span class="legend-swatch legend-orange"></span> Orange wire</li>
+          <li><span class="legend-swatch legend-brown"></span> Brown wire</li>
+          <li><span class="legend-swatch legend-gray"></span> Gray wire</li>
+          <li><span class="legend-swatch legend-purple"></span> Purple wire</li>
+          <li><span class="legend-swatch legend-white"></span> White wire</li>
+        </ul>
+      </section>
 
-        <div class="table-wrap">
-          <table class="doc-table">
-            <thead>
-              <tr>
-                <th scope="col">Nucleo Pin</th>
-                <th scope="col">Arduino Label</th>
-                <th scope="col">Reserved Function</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>PA2</td>
-                <td>A2</td>
-                <td>UART link to ST-Link interface</td>
-              </tr>
-              <tr>
-                <td>PA3</td>
-                <td>A3</td>
-                <td>UART link to ST-Link interface</td>
-              </tr>
-              <tr>
-                <td>PA5</td>
-                <td>A5</td>
-                <td>Onboard user LED</td>
-              </tr>
-              <tr>
-                <td>PA11</td>
-                <td>A11</td>
-                <td>USB interface</td>
-              </tr>
-              <tr>
-                <td>PA12</td>
-                <td>A12</td>
-                <td>USB interface</td>
-              </tr>
-              <tr>
-                <td>PA13</td>
-                <td>A13</td>
-                <td>SWD programming interface</td>
-              </tr>
-              <tr>
-                <td>PA14</td>
-                <td>A14</td>
-                <td>SWD programming interface</td>
-              </tr>
-              <tr>
-                <td>PC13</td>
-                <td>C13</td>
-                <td>User button input</td>
-              </tr>
-              <tr>
-                <td>PC14</td>
-                <td>C14</td>
-                <td>32 kHz RTC oscillator</td>
-              </tr>
-              <tr>
-                <td>PC15</td>
-                <td>C15</td>
-                <td>32 kHz RTC oscillator</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <section class="doc-section">
+        <h2>Nucleo Pin Constraints</h2>
+        <p>
+          Several Nucleo pins were avoided because they are tied to onboard functions such as ST-Link
+          communication, USB, SWD programming, the user button, the onboard LED, and the RTC oscillator.
+          Avoiding these pins helped preserve reliable programming, debugging, and serial access during
+          development and testing.
+        </p>
 
-      <section class="doc-section">
-        <h2>Power</h2>
-        <div class="table-wrap">
-          <table class="doc-table">
-            <thead>
-              <tr>
-                <th scope="col">Signal</th>
-                <th scope="col">Connection</th>
-                <th scope="col">Wire Color</th>
-                <th scope="col">Notes</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>VIN</td>
-                <td class="pin-power">VIN</td>
-                <td>Red</td>
-                <td>Main battery power input</td>
-              </tr>
-              <tr>
-                <td>GND</td>
-                <td class="pin-ground">GND</td>
-                <td>Black</td>
-                <td>Common ground reference for the system</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th scope="col">Nucleo Pin</th>
+                <th scope="col">Arduino Label</th>
+                <th scope="col">Reserved Function</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>PA2</td>
+                <td>A2</td>
+                <td>UART link to ST-Link interface</td>
+              </tr>
+              <tr>
+                <td>PA3</td>
+                <td>A3</td>
+                <td>UART link to ST-Link interface</td>
+              </tr>
+              <tr>
+                <td>PA5</td>
+                <td>A5</td>
+                <td>Onboard user LED</td>
+              </tr>
+              <tr>
+                <td>PA11</td>
+                <td>A11</td>
+                <td>USB interface</td>
+              </tr>
+              <tr>
+                <td>PA12</td>
+                <td>A12</td>
+                <td>USB interface</td>
+              </tr>
+              <tr>
+                <td>PA13</td>
+                <td>A13</td>
+                <td>SWD programming interface</td>
+              </tr>
+              <tr>
+                <td>PA14</td>
+                <td>A14</td>
+                <td>SWD programming interface</td>
+              </tr>
+              <tr>
+                <td>PC13</td>
+                <td>C13</td>
+                <td>User button input</td>
+              </tr>
+              <tr>
+                <td>PC14</td>
+                <td>C14</td>
+                <td>32 kHz RTC oscillator</td>
+              </tr>
+              <tr>
+                <td>PC15</td>
+                <td>C15</td>
+                <td>32 kHz RTC oscillator</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-      <section class="doc-section">
-        <h2>Motor Control</h2>
-        <p>
-          The drivetrain used separate effort, direction, and enable lines for each motor. These
-          connections supported closed-loop speed control and direction changes during line following,
-          turning, and wall-response behaviors.
-        </p>
+      <section class="doc-section">
+        <h2>Power</h2>
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th scope="col">Signal</th>
+                <th scope="col">Connection</th>
+                <th scope="col">Wire Color</th>
+                <th scope="col">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>VIN</td>
+                <td class="pin-red">VIN</td>
+                <td>Red</td>
+                <td>Main battery power input</td>
+              </tr>
+              <tr>
+                <td>GND</td>
+                <td class="pin-black">GND</td>
+                <td>Black</td>
+                <td>Common ground reference for the system</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-        <div class="table-wrap">
-          <table class="doc-table">
-            <thead>
-              <tr>
-                <th scope="col">Motor</th>
-                <th scope="col">Signal</th>
-                <th scope="col">Nucleo Pin</th>
-                <th scope="col">Wire Color</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Right</td>
-                <td>Motor Effort</td>
-                <td class="pin-motor">PB6</td>
-                <td>Green</td>
-              </tr>
-              <tr>
-                <td>Right</td>
-                <td>Motor Direction</td>
-                <td class="pin-motor">PA7</td>
-                <td>Blue</td>
-              </tr>
-              <tr>
-                <td>Right</td>
-                <td>Motor Enable</td>
-                <td class="pin-motor">PA6</td>
-                <td>Yellow</td>
-              </tr>
-              <tr>
-                <td>Left</td>
-                <td>Motor Enable</td>
-                <td class="pin-motor">PB3</td>
-                <td>Yellow</td>
-              </tr>
-              <tr>
-                <td>Left</td>
-                <td>Motor Direction</td>
-                <td class="pin-motor">PB5</td>
-                <td>Blue</td>
-              </tr>
-              <tr>
-                <td>Left</td>
-                <td>Motor Effort</td>
-                <td class="pin-motor">PB4</td>
-                <td>Green</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <section class="doc-section">
+        <h2>Motor Control</h2>
+        <p>
+          The drivetrain used separate effort, direction, and enable lines for each motor. These
+          connections supported closed-loop speed control and direction changes during line following,
+          turning, and wall-response behaviors.
+        </p>
 
-      <section class="doc-section">
-        <h2>Encoder Connections</h2>
-        <p>
-          Quadrature encoder feedback from both wheels was routed directly to the Nucleo so that the
-          software could measure wheel speed and traveled distance for closed-loop motor control and
-          state estimation.
-        </p>
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th scope="col">Motor</th>
+                <th scope="col">Signal</th>
+                <th scope="col">Nucleo Pin</th>
+                <th scope="col">Wire Color</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Right</td>
+                <td>Motor Effort</td>
+                <td class="pin-green">PB6</td>
+                <td>Green</td>
+              </tr>
+              <tr>
+                <td>Right</td>
+                <td>Motor Direction</td>
+                <td class="pin-blue">PA7</td>
+                <td>Blue</td>
+              </tr>
+              <tr>
+                <td>Right</td>
+                <td>Motor Enable</td>
+                <td class="pin-yellow">PA6</td>
+                <td>Yellow</td>
+              </tr>
+              <tr>
+                <td>Left</td>
+                <td>Motor Enable</td>
+                <td class="pin-yellow">PB3</td>
+                <td>Yellow</td>
+              </tr>
+              <tr>
+                <td>Left</td>
+                <td>Motor Direction</td>
+                <td class="pin-blue">PB5</td>
+                <td>Blue</td>
+              </tr>
+              <tr>
+                <td>Left</td>
+                <td>Motor Effort</td>
+                <td class="pin-green">PB4</td>
+                <td>Green</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-        <div class="table-wrap">
-          <table class="doc-table">
-            <thead>
-              <tr>
-                <th scope="col">Encoder</th>
-                <th scope="col">Signal</th>
-                <th scope="col">Nucleo Pin</th>
-                <th scope="col">Wire Color</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Right</td>
-                <td>Encoder Channel B</td>
-                <td class="pin-encoder">PA1</td>
-                <td>Yellow</td>
-              </tr>
-              <tr>
-                <td>Right</td>
-                <td>Encoder Channel A</td>
-                <td class="pin-encoder">PA0</td>
-                <td>Blue</td>
-              </tr>
-              <tr>
-                <td>Left</td>
-                <td>Encoder Channel B</td>
-                <td class="pin-encoder">PA8</td>
-                <td>Blue</td>
-              </tr>
-              <tr>
-                <td>Left</td>
-                <td>Encoder Channel A</td>
-                <td class="pin-encoder">PA9</td>
-                <td>Yellow</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <section class="doc-section">
+        <h2>Encoder Connections</h2>
+        <p>
+          Quadrature encoder feedback from both wheels was routed directly to the Nucleo so that the
+          software could measure wheel speed and traveled distance for closed-loop motor control and
+          state estimation.
+        </p>
 
-      <section class="doc-section">
-        <h2>IR Sensor Array</h2>
-        <p>
-          The line sensor array used seven analog reflectance channels. These signals were read by
-          the controller to compute line position and steering error during centroid-based line following.
-        </p>
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th scope="col">Encoder</th>
+                <th scope="col">Signal</th>
+                <th scope="col">Nucleo Pin</th>
+                <th scope="col">Wire Color</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Right</td>
+                <td>Encoder Channel B</td>
+                <td class="pin-yellow">PA1</td>
+                <td>Yellow</td>
+              </tr>
+              <tr>
+                <td>Right</td>
+                <td>Encoder Channel A</td>
+                <td class="pin-blue">PA0</td>
+                <td>Blue</td>
+              </tr>
+              <tr>
+                <td>Left</td>
+                <td>Encoder Channel B</td>
+                <td class="pin-blue">PA8</td>
+                <td>Blue</td>
+              </tr>
+              <tr>
+                <td>Left</td>
+                <td>Encoder Channel A</td>
+                <td class="pin-yellow">PA9</td>
+                <td>Yellow</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-        <div class="table-wrap">
-          <table class="doc-table">
-            <thead>
-              <tr>
-                <th scope="col">Sensor Channel</th>
-                <th scope="col">Nucleo Pin</th>
-                <th scope="col">Wire Color</th>
-                <th scope="col">Notes</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Sensor 13</td>
-                <td class="pin-line">PC3</td>
-                <td>Brown</td>
-                <td>Outer channel</td>
-              </tr>
-              <tr>
-                <td>Sensor 11</td>
-                <td class="pin-line">PC2</td>
-                <td>Red</td>
-                <td>Outer-mid channel</td>
-              </tr>
-              <tr>
-                <td>Sensor 9</td>
-                <td class="pin-line">PC0</td>
-                <td>Orange</td>
-                <td>Mid channel</td>
-              </tr>
-              <tr>
-                <td>Sensor 7</td>
-                <td class="pin-line">PC1</td>
-                <td>Yellow</td>
-                <td>Center channel region</td>
-              </tr>
-              <tr>
-                <td>Sensor 5</td>
-                <td class="pin-line">PB0</td>
-                <td>Green</td>
-                <td>Center channel region</td>
-              </tr>
-              <tr>
-                <td>Sensor 3</td>
-                <td class="pin-line">PA4</td>
-                <td>Gray</td>
-                <td>Inner channel</td>
-              </tr>
-              <tr>
-                <td>Sensor 1</td>
-                <td class="pin-line">PC4</td>
-                <td>Purple</td>
-                <td>Outer channel</td>
-              </tr>
-              <tr>
-                <td>Sensor GND</td>
-                <td class="pin-ground">GND</td>
-                <td>Black</td>
-                <td>Sensor ground</td>
-              </tr>
-              <tr>
-                <td>Sensor VCC</td>
-                <td class="pin-power">+3V3</td>
-                <td>White</td>
-                <td>Sensor supply voltage</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <section class="doc-section">
+        <h2>IR Sensor Array</h2>
+        <p>
+          The line sensor array used seven analog reflectance channels. These signals were read by
+          the controller to compute line position and steering error during centroid-based line following.
+        </p>
 
-      <section class="doc-section">
-        <h2>IMU Connections</h2>
-        <p>
-          The BNO055 IMU was connected over I2C and powered from the 3.3 V rail. This interface
-          provided heading information used during turning actions and observer-based state estimation.
-        </p>
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th scope="col">Sensor Channel</th>
+                <th scope="col">Nucleo Pin</th>
+                <th scope="col">Wire Color</th>
+                <th scope="col">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Sensor 13</td>
+                <td class="pin-brown">PC3</td>
+                <td>Brown</td>
+                <td>Outer channel</td>
+              </tr>
+              <tr>
+                <td>Sensor 11</td>
+                <td class="pin-red">PC2</td>
+                <td>Red</td>
+                <td>Outer-mid channel</td>
+              </tr>
+              <tr>
+                <td>Sensor 9</td>
+                <td class="pin-orange">PC0</td>
+                <td>Orange</td>
+                <td>Mid channel</td>
+              </tr>
+              <tr>
+                <td>Sensor 7</td>
+                <td class="pin-yellow">PC1</td>
+                <td>Yellow</td>
+                <td>Center channel region</td>
+              </tr>
+              <tr>
+                <td>Sensor 5</td>
+                <td class="pin-green">PB0</td>
+                <td>Green</td>
+                <td>Center channel region</td>
+              </tr>
+              <tr>
+                <td>Sensor 3</td>
+                <td class="pin-gray">PA4</td>
+                <td>Gray</td>
+                <td>Inner channel</td>
+              </tr>
+              <tr>
+                <td>Sensor 1</td>
+                <td class="pin-purple">PC4</td>
+                <td>Purple</td>
+                <td>Outer channel</td>
+              </tr>
+              <tr>
+                <td>Sensor GND</td>
+                <td class="pin-black">GND</td>
+                <td>Black</td>
+                <td>Sensor ground</td>
+              </tr>
+              <tr>
+                <td>Sensor VCC</td>
+                <td class="pin-white">+3V3</td>
+                <td>White</td>
+                <td>Sensor supply voltage</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-        <div class="table-wrap">
-          <table class="doc-table">
-            <thead>
-              <tr>
-                <th scope="col">IMU Signal</th>
-                <th scope="col">Nucleo Pin / Connection</th>
-                <th scope="col">Wire Color</th>
-                <th scope="col">Notes</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>SCL</td>
-                <td class="pin-imu">PB9</td>
-                <td>Blue</td>
-                <td>I2C clock</td>
-              </tr>
-              <tr>
-                <td>SDA</td>
-                <td class="pin-imu">PB8</td>
-                <td>Yellow</td>
-                <td>I2C data</td>
-              </tr>
-              <tr>
-                <td>Reset / Ground tie</td>
-                <td class="pin-ground">GND</td>
-                <td>Green</td>
-                <td>Reset-related grounding connection shown in the wiring sheet</td>
-              </tr>
-              <tr>
-                <td>GND</td>
-                <td class="pin-ground">GND</td>
-                <td>Black</td>
-                <td>Ground reference</td>
-              </tr>
-              <tr>
-                <td>VIN</td>
-                <td class="pin-power">+3V3</td>
-                <td>Red</td>
-                <td>3.3 V supply from the controller</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <section class="doc-section">
+        <h2>IMU Connections</h2>
+        <p>
+          The BNO055 IMU was connected over I2C and powered from the 3.3 V rail. This interface
+          provided heading information used during turning actions and observer-based state estimation.
+        </p>
 
-      <section class="doc-section">
-        <h2>Bump Sensors</h2>
-        <p>
-          Left and right bumper switch assemblies were connected as grouped digital inputs. These
-          signals were used by the navigation task to detect wall contact and trigger backing-up and
-          recovery behaviors.
-        </p>
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th scope="col">IMU Signal</th>
+                <th scope="col">Nucleo Pin / Connection</th>
+                <th scope="col">Wire Color</th>
+                <th scope="col">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>SCL</td>
+                <td class="pin-blue">PB9</td>
+                <td>Blue</td>
+                <td>I2C clock</td>
+              </tr>
+              <tr>
+                <td>SDA</td>
+                <td class="pin-yellow">PB8</td>
+                <td>Yellow</td>
+                <td>I2C data</td>
+              </tr>
+              <tr>
+                <td>Reset / Ground tie</td>
+                <td class="pin-green">GND</td>
+                <td>Green</td>
+                <td>Ground-related reset connection shown in the board table</td>
+              </tr>
+              <tr>
+                <td>GND</td>
+                <td class="pin-black">GND</td>
+                <td>Black</td>
+                <td>Ground reference</td>
+              </tr>
+              <tr>
+                <td>VIN</td>
+                <td class="pin-red">+3V3</td>
+                <td>Red</td>
+                <td>3.3 V supply from the controller</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-        <div class="table-wrap">
-          <table class="doc-table">
-            <thead>
-              <tr>
-                <th scope="col">Side</th>
-                <th scope="col">Board Pin</th>
-                <th scope="col">Nucleo Pin</th>
-                <th scope="col">Wire Color</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Right</td>
-                <td>BMP2</td>
-                <td class="pin-bump">PB15</td>
-                <td>Yellow</td>
-              </tr>
-              <tr>
-                <td>Right</td>
-                <td>BMP1</td>
-                <td class="pin-bump">PB14</td>
-                <td>Orange</td>
-              </tr>
-              <tr>
-                <td>Right</td>
-                <td>BMP0</td>
-                <td class="pin-bump">PB13</td>
-                <td>Red</td>
-              </tr>
-              <tr>
-                <td>Left</td>
-                <td>BMP5</td>
-                <td class="pin-bump">PC8</td>
-                <td>Yellow</td>
-              </tr>
-              <tr>
-                <td>Left</td>
-                <td>BMP4</td>
-                <td class="pin-bump">PC6</td>
-                <td>Orange</td>
-              </tr>
-              <tr>
-                <td>Left</td>
-                <td>BMP3</td>
-                <td class="pin-bump">PC5</td>
-                <td>Red</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <section class="doc-section">
+        <h2>Bump Sensors</h2>
+        <p>
+          Left and right bumper switch assemblies were connected as grouped digital inputs. These
+          signals were used by the navigation task to detect wall contact and trigger backing-up and
+          recovery behaviors.
+        </p>
 
-      <section class="doc-section">
-        <h2>Wiring Diagram and Full Assembly</h2>
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th scope="col">Side</th>
+                <th scope="col">Board Pin</th>
+                <th scope="col">Nucleo Pin</th>
+                <th scope="col">Wire Color</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Right</td>
+                <td>BMP2</td>
+                <td class="pin-yellow">PB15</td>
+                <td>Yellow</td>
+              </tr>
+              <tr>
+                <td>Right</td>
+                <td>BMP1</td>
+                <td class="pin-orange">PB14</td>
+                <td>Orange</td>
+              </tr>
+              <tr>
+                <td>Right</td>
+                <td>BMP0</td>
+                <td class="pin-red">PB13</td>
+                <td>Red</td>
+              </tr>
+              <tr>
+                <td>Left</td>
+                <td>BMP5</td>
+                <td class="pin-yellow">PC8</td>
+                <td>Yellow</td>
+              </tr>
+              <tr>
+                <td>Left</td>
+                <td>BMP4</td>
+                <td class="pin-orange">PC6</td>
+                <td>Orange</td>
+              </tr>
+              <tr>
+                <td>Left</td>
+                <td>BMP3</td>
+                <td class="pin-red">PC5</td>
+                <td>Red</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-        <figure class="doc-figure">
-          <img src="pins.png" alt="Final Romi wiring diagram" />
-          <figcaption>
-            Final wiring diagram showing the pin-level interconnects used on the robot.
-          </figcaption>
-        </figure>
+      <section class="doc-section">
+        <h2>Wiring Diagram and Full Assembly</h2>
 
-        <figure class="doc-figure">
-          <img src="20260320_144441.jpg" alt="Fully assembled Romi robot" />
-          <figcaption>
-            Fully assembled Romi with integrated controller stack, front sensors, and wiring harness
-            used during obstacle-course testing.
-          </figcaption>
-        </figure>
-      </section>
-    </main>
-  </div>
+        <figure class="doc-figure">
+          <img src="PASTE_WIRING_DIAGRAM_IMAGE_LINK_HERE" alt="Final Romi wiring diagram" />
+          <figcaption>
+            Final wiring diagram showing the pin-level interconnects used on the robot.
+          </figcaption>
+        </figure>
+
+        <figure class="doc-figure">
+          <img
+            src="https://github.com/user-attachments/assets/59b8538a-9f08-433e-8024-1bff118f0d29"
+            alt="Fully assembled Romi robot"
+          />
+          <figcaption>
+            Fully assembled Romi with integrated controller stack, front sensors, and wiring harness
+            used during obstacle-course testing.
+          </figcaption>
+        </figure>
+      </section>
+    </main>
+  </div>
 </body>
 </html>
