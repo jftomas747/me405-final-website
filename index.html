@@ -3,355 +3,111 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ME405 Final Project - MECH13</title>
+  <title>ME405 Final Project - MECH13 | Overview</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-content">
-      <h1>ME405 Final Project - MECH13</h1>
-      <p>Autonomous Romi Obstacle Course Robot</p>
-    </div>
-  </header>
-
-  <nav class="site-nav">
-    <a href="#overview">Overview</a>
-    <a href="#team">Team</a>
-    <a href="#hardware">Hardware</a>
-    <a href="#results">Results</a>
-    <a href="#diagrams">Diagrams</a>
-    <a href="#code">Code</a>
-    <a href="#video">Video</a>
-  </nav>
-
-  <main>
-    <section id="overview" class="card">
-      <h2>Project Overview</h2>
-      <p>
-        This project combined the major sensing, actuation, and control systems developed in ME405
-        into one autonomous Romi robot capable of completing an obstacle course. Our final design
-        brought together line following, bump detection, encoder-based motion control, and IMU-based
-        state estimation into a single multitask robot system.
-      </p>
-      <p>
-        The goal of the project was to take the individual labs completed throughout the quarter and
-        integrate them into one working mechatronic platform. By the end of the project, our robot
-        was able to follow a printed path, respond to obstacles, perform turning maneuvers, and use
-        multiple sensors together to improve navigation and consistency.
-      </p>
-    </section>
-
-    <section id="team" class="card">
-      <h2>Team Members</h2>
-      <p>John Tomas &amp; Kaden Guevarra</p>
-    </section>
-
-    <section id="hardware" class="card">
-      <h2>Hardware / Mechanical &amp; Electrical Design</h2>
-
-      <div class="image-wrap">
-        <img
-          src="https://github.com/user-attachments/assets/59b8538a-9f08-433e-8024-1bff118f0d29"
-          alt="Photo of our Romi robot"
-        />
+  <div class="page">
+    <aside class="sidebar">
+      <div class="sidebar-title">
+        <h1>ME405 Final Project</h1>
+        <p>MECH13</p>
       </div>
+      <nav class="sidebar-nav">
+        <a class="active" href="index.html">Overview</a>
+        <a href="hardware.html">Hardware</a>
+        <a href="wiring.html">Wiring</a>
+        <a href="diagrams.html">FSMs &amp; Diagrams</a>
+        <a href="code.html">Source Code</a>
+        <a href="results.html">Results</a>
+        <a href="video.html">Video Demo</a>
+      </nav>
+    </aside>
 
-      <h3>Base Platform</h3>
-      <p>
-        Our robot was built on the standard Romi platform used throughout the ME405 lab sequence.
-        The base system included the Romi chassis, DC motors, wheel encoders, a Nucleo L476RG
-        microcontroller, a modified Shoe of Brian, and a BNO055 IMU breakout board.
-      </p>
+    <main class="content">
+      <header class="doc-header">
+        <h1>Overview</h1>
+        <p class="subtitle">Autonomous Romi Obstacle Course Robot</p>
+      </header>
 
-      <h3>Added Sensors and Components</h3>
-      <p>
-        To improve obstacle-course performance, we added a QTRX-MD-07A 7-channel analog reflectance
-        sensor array for line detection and right and left bumper switch assemblies for wall contact
-        sensing. These additions allowed the robot to follow the course line while also detecting
-        collisions or boundary contact during navigation.
-      </p>
+      <section class="doc-section">
+        <h2>Project Overview</h2>
+        <p>
+          This project brought together the major sensing, actuation, and control systems developed
+          throughout ME405 into one autonomous Romi robot capable of navigating a printed obstacle
+          course. Our final robot combined closed-loop motor control, encoder feedback, line following,
+          bump sensing, inertial sensing, and observer-based state estimation into a single multitask
+          system.
+        </p>
+        <p>
+          Rather than relying on only one sensing method, our design used the strengths of several
+          subsystems together. The line sensor handled most of the path tracking, the encoders supported
+          motion control and distance-based actions, the bump sensors handled wall interaction, and the
+          IMU and state estimator improved heading awareness and motion prediction during turns and
+          transitions.
+        </p>
+      </section>
 
-      <h3>Mechanical Layout</h3>
-      <p>
-        The reflectance sensor array was mounted near the front underside of the robot using stand-offs
-        so that it sat just above the ground for reliable line sensing. The bump sensors were mounted at
-        the front of the robot in a position that allowed them to contact walls before the line sensor,
-        helping protect the sensor array from impact. This layout was chosen to improve sensor reliability
-        while keeping the robot compact and functional.
-      </p>
-
-      <h3>Electrical Integration</h3>
-      <p>
-        All components were wired into the Nucleo using a common ground system. Power was distributed
-        through VIN and GND, while motors, encoders, the line sensor array, IMU, and bump sensors were
-        connected to their assigned pins on the microcontroller. This wiring arrangement allowed us to
-        combine motor control, encoder feedback, line sensing, inertial measurement, and bumper input
-        into one integrated robot system.
-      </p>
-
-      <h3>Hardware List and Product Links</h3>
-      <ul class="hardware-list">
-        <li>
-          <a href="https://www.pololu.com/product/3500" target="_blank" rel="noopener noreferrer">
-            Pololu Romi Chassis Kit
-          </a>
-        </li>
-        <li>
-          <a href="https://www.pololu.com/product/4447" target="_blank" rel="noopener noreferrer">
-            Pololu QTRX-MD-07A Reflectance Sensor Array
-          </a>
-        </li>
-        <li>
-          <a href="https://www.pololu.com/product/3673" target="_blank" rel="noopener noreferrer">
-            Pololu Left Bumper Switch Assembly for Romi/TI-RSLK MAX
-          </a>
-        </li>
-        <li>
-          <a href="https://www.pololu.com/product/3674" target="_blank" rel="noopener noreferrer">
-            Pololu Right Bumper Switch Assembly for Romi/TI-RSLK MAX
-          </a>
-        </li>
-      </ul>
-
-      <div class="support-files">
-        <h3>Supporting Files</h3>
+      <section class="doc-section">
+        <h2>Team Members</h2>
         <ul>
-          <li><a href="PASTE_WIRING_MAP_LINK_HERE" target="_blank" rel="noopener noreferrer">Wiring Map</a></li>
-          <li><a href="PASTE_MECHANICAL_MAP_LINK_HERE" target="_blank" rel="noopener noreferrer">Mechanical Map</a></li>
+          <li>John Tomas</li>
+          <li>Kaden Guevarra</li>
         </ul>
-      </div>
-    </section>
+      </section>
 
-    <section id="results" class="card">
-      <h2>Results</h2>
+      <section class="doc-section">
+        <h2>Robot Overview Image</h2>
+        <figure class="doc-figure">
+          <img
+            src="https://github.com/user-attachments/assets/59b8538a-9f08-433e-8024-1bff118f0d29"
+            alt="Photo of our Romi robot"
+          />
+          <figcaption>Final Romi robot configuration used during the obstacle-course demonstration.</figcaption>
+        </figure>
+      </section>
 
-      <div class="results-grid results-grid-two">
-        <div class="stat-box">
-          <h3>Main Track Completion</h3>
-          <p>Completed</p>
+      <section class="doc-section">
+        <h2>Documentation Pages</h2>
+        <div class="quick-grid">
+          <div class="quick-card">
+            <h3>Hardware</h3>
+            <p>Physical platform, added sensors, and mechanical layout.</p>
+            <a href="hardware.html">Open page</a>
+          </div>
+
+          <div class="quick-card">
+            <h3>Wiring</h3>
+            <p>Electrical integration and final pin assignments.</p>
+            <a href="wiring.html">Open page</a>
+          </div>
+
+          <div class="quick-card">
+            <h3>FSMs &amp; Diagrams</h3>
+            <p>Task diagram, finite state machines, and navigator state diagram.</p>
+            <a href="diagrams.html">Open page</a>
+          </div>
+
+          <div class="quick-card">
+            <h3>Source Code</h3>
+            <p>Organized links to the Python files used in the final project.</p>
+            <a href="code.html">Open page</a>
+          </div>
+
+          <div class="quick-card">
+            <h3>Results</h3>
+            <p>Track performance, control gains, and final discussion.</p>
+            <a href="results.html">Open page</a>
+          </div>
+
+          <div class="quick-card">
+            <h3>Video Demo</h3>
+            <p>Final demonstration video for the completed Romi robot.</p>
+            <a href="video.html">Open page</a>
+          </div>
         </div>
-
-        <div class="stat-box">
-          <h3>Official Time</h3>
-          <p>2:00</p>
-        </div>
-      </div>
-
-      <p>
-        Our robot successfully completed the main required tasks of the final track, including line
-        following, turning, wall interaction, and overall path navigation. Our official completion
-        time for the track was exactly 2 minutes.
-      </p>
-
-      <p>
-        In our motor tuning and control development, the best performance came from using
-        a proportional gain of <strong>Kp = 2.9</strong>, an integral gain of
-        <strong>Ki = 0.1</strong>, a motor gain of <strong>K = 0.2</strong>, and a set point of
-        <strong>S = 120 counts/s</strong>.
-      </p>
-
-      <p>
-        One major challenge in tuning the robot was that changing the control values often caused
-        unpredictable motor behavior. Small adjustments to the gains or the set point could make the
-        response less stable, less repeatable, or more difficult to control during the full track run.
-        Because of this, once we found a set of values that gave acceptable performance, we tried to
-        keep them consistent rather than continue making aggressive tuning changes right before the
-        demonstration.
-      </p>
-
-      <p>
-        Overall, the robot demonstrated the successful integration of the major subsystems developed
-        throughout the quarter. The final system was able to perform the core navigation tasks required
-        by the project and complete the track within the official time limit.
-      </p>
-
-      <figure class="media-card">
-        <img src="https://i.imgur.com/mQRiPmc.png" alt="ME405 final project game track" />
-        <figcaption>
-          Printed course used during the final demonstration, including the straightaway,
-          garage wall section, slalom, turnaround, and bonus regions.
-        </figcaption>
-      </figure>
-    </section>
-
-    <section id="diagrams" class="card">
-      <h2>System Diagrams and Finite State Machines</h2>
-
-      <p>
-        The following diagrams summarize the overall task structure and the finite state machines
-        used throughout the robot software. Together, they show how user interaction, motor control,
-        line sensing, estimation, and inertial sensing were organized into separate behaviors that
-        worked together during operation.
-      </p>
-
-      <div class="diagram-grid">
-        <figure class="diagram-card">
-          <img src="https://i.imgur.com/QOvlA8q.png" alt="Updated task diagram" />
-          <figcaption>
-            <strong>Updated Task Diagram</strong><br />
-            High-level task structure showing how the major software tasks interact.
-          </figcaption>
-        </figure>
-
-        <figure class="diagram-card">
-          <img src="https://i.imgur.com/yzKMSLF.png" alt="User interface finite state machine" />
-          <figcaption>
-            <strong>User Interface FSM</strong><br />
-            Finite state machine for user input, menu selection, and command handling.
-          </figcaption>
-        </figure>
-
-        <figure class="diagram-card">
-          <img src="https://i.imgur.com/ePfqqhg.png" alt="Left motor and encoder finite state machine" />
-          <figcaption>
-            <strong>Left Motor &amp; Encoder FSM</strong><br />
-            State flow for validating input, registering gains, running the motor, and reading encoder output.
-          </figcaption>
-        </figure>
-
-        <figure class="diagram-card">
-          <img src="https://i.imgur.com/olAPql0.png" alt="Right motor and encoder finite state machine" />
-          <figcaption>
-            <strong>Right Motor &amp; Encoder FSM</strong><br />
-            State flow for the right-side motor control and encoder feedback loop.
-          </figcaption>
-        </figure>
-
-        <figure class="diagram-card">
-          <img src="https://i.imgur.com/aP0xOx3.png" alt="Line sensor finite state machine" />
-          <figcaption>
-            <strong>Line Sensor FSM</strong><br />
-            Line-sensor behavior used to detect off-center conditions and apply steering corrections.
-          </figcaption>
-        </figure>
-
-        <figure class="diagram-card">
-          <img src="https://i.imgur.com/ivEkiWK.png" alt="State estimation finite state machine" />
-          <figcaption>
-            <strong>State Estimation FSM</strong><br />
-            Estimator behavior for sensor waiting, initialization, normal operation, degraded mode, and fault handling.
-          </figcaption>
-        </figure>
-
-        <figure class="diagram-card">
-          <img src="https://i.imgur.com/Zuo3DSG.png" alt="IMU finite state machine" />
-          <figcaption>
-            <strong>IMU FSM</strong><br />
-            Inertial sensing flow for configuration, calibration, fusion mode, runtime operation, and fault recovery.
-          </figcaption>
-        </figure>
-
-        <figure class="diagram-card">
-          <img src="https://i.imgur.com/gnvW9in.png" alt="Navigator state diagram" />
-          <figcaption>
-            <strong>Navigator State Diagram</strong><br />
-            Navigation sequence for line following, wall interaction, turning, and final alignment on the competition track.
-          </figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section id="code" class="card">
-      <h2>Code / Software Architecture</h2>
-
-      <p>
-        Our software was organized as a multitask robot control system. At a high level, the code
-        handled user interaction, motor control, encoder feedback, line sensing, bump sensing,
-        navigation, and state estimation. The project was built from the earlier labs and then
-        combined into one final program for the obstacle course.
-      </p>
-
-      <div class="code-grid">
-        <article class="code-card">
-          <h3>main.py</h3>
-          <p>
-            Main startup file that creates the hardware objects, initializes shared variables,
-            and launches the task scheduler for the full robot system.
-          </p>
-          <a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/main.py" target="_blank" rel="noopener noreferrer">View file</a>
-        </article>
-
-        <article class="code-card">
-          <h3>Motor Control</h3>
-          <p>
-            Includes the motor driver, encoder reader, and motor task files used for closed-loop
-            motion control and velocity feedback.
-          </p>
-          <ul>
-            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/motor_driver.py" target="_blank" rel="noopener noreferrer">motor_driver.py</a></li>
-            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/encoder.py" target="_blank" rel="noopener noreferrer">encoder.py</a></li>
-            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_motor.py" target="_blank" rel="noopener noreferrer">task_motor.py</a></li>
-          </ul>
-        </article>
-
-        <article class="code-card">
-          <h3>Line Following and Navigation</h3>
-          <p>
-            These files manage line sensing, navigation behavior, and the robot’s response to the
-            printed course layout.
-          </p>
-          <ul>
-            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/linesensor_driver.py" target="_blank" rel="noopener noreferrer">linesensor_driver.py</a></li>
-            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_navigator.py" target="_blank" rel="noopener noreferrer">task_navigator.py</a></li>
-          </ul>
-        </article>
-
-        <article class="code-card">
-          <h3>IMU and State Estimation</h3>
-          <p>
-            These modules support orientation sensing, observer-based estimation, and predicted
-            robot motion during navigation.
-          </p>
-          <ul>
-            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/imu_driver.py" target="_blank" rel="noopener noreferrer">imu_driver.py</a></li>
-            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/estimator.py" target="_blank" rel="noopener noreferrer">estimator.py</a></li>
-            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_estimator.py" target="_blank" rel="noopener noreferrer">task_estimator.py</a></li>
-          </ul>
-        </article>
-
-        <article class="code-card">
-          <h3>Bump Sensing</h3>
-          <p>
-            These files handle bumper input and collision-triggered behavior during the obstacle
-            course.
-          </p>
-          <ul>
-            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/bump_sensor.py" target="_blank" rel="noopener noreferrer">bump_sensor.py</a></li>
-            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_bump.py" target="_blank" rel="noopener noreferrer">task_bump.py</a></li>
-          </ul>
-        </article>
-
-        <article class="code-card">
-          <h3>Task Framework and UI</h3>
-          <p>
-            These support files manage task scheduling, shared variables, startup logic, and user
-            interaction for calibration and testing.
-          </p>
-          <ul>
-            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/cotask.py" target="_blank" rel="noopener noreferrer">cotask.py</a></li>
-            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_share.py" target="_blank" rel="noopener noreferrer">task_share.py</a></li>
-            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_user.py" target="_blank" rel="noopener noreferrer">task_user.py</a></li>
-            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_start_button.py" target="_blank" rel="noopener noreferrer">task_start_button.py</a></li>
-          </ul>
-        </article>
-      </div>
-
-      <p class="repo-link">
-        <a href="https://github.com/KadenGuevarra/ME405_Final_MECH13" target="_blank" rel="noopener noreferrer">
-          View Full Repository
-        </a>
-      </p>
-    </section>
-
-    <section id="video" class="card">
-      <h2>Video Demo</h2>
-      <p>
-        Watch the final demonstration here:
-        <a href="https://youtu.be/V55OzWEsSkU" target="_blank" rel="noopener noreferrer">
-          YouTube Demo Video
-        </a>
-      </p>
-    </section>
-  </main>
+      </section>
+    </main>
+  </div>
 </body>
 </html>
