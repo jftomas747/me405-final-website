@@ -131,3 +131,101 @@ a:hover {
     padding: 20px;
   }
 }
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 20px 0 24px;
+}
+
+.stat-box {
+  background: #eef5e8;
+  border: 1px solid #d7e4cd;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+
+.stat-box h3 {
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+  color: #2f6b2f;
+}
+
+.stat-box p {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1f1f1f;
+}
+
+.media-card {
+  margin: 24px 0 0;
+}
+
+.media-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.media-card figcaption {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.code-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.code-card {
+  background: #fafaf7;
+  border: 1px solid #e2e6dc;
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.code-card h3 {
+  margin-top: 0;
+  color: #2f6b2f;
+}
+
+.code-card ul {
+  padding-left: 18px;
+  margin-bottom: 0;
+}
+
+.code-card li {
+  margin-bottom: 6px;
+}
+
+.repo-link {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.repo-link a {
+  display: inline-block;
+  background: #2f6b2f;
+  color: #f4d03f;
+  text-decoration: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.repo-link a:hover {
+  background: #255625;
+}
+
+@media (max-width: 800px) {
+  .results-grid,
+  .code-grid {
+    grid-template-columns: 1fr;
+  }
+}
