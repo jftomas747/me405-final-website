@@ -33,3 +33,31 @@ h1, h2 {
 a {
   color: #0b5ed7;
 }
+
+#overview,
+#hardware {
+  background: white;
+  padding: 24px;
+  margin-bottom: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+#hardware h3 {
+  margin-top: 20px;
+}
+
+#hardware ul {
+  padding-left: 20px;
+}
+
+#hardware li {
+  margin-bottom: 8px;
+}
+
+.hardware-image img {
+  max-width: 100%;
+  border-radius: 10px;
+  display: block;
+  margin-top: 16px;
+}
