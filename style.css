@@ -126,9 +126,15 @@ a:hover {
 
 .results-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   margin: 20px 0 24px;
+}
+
+.results-grid-two {
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .stat-box {
@@ -209,7 +215,7 @@ a:hover {
 }
 
 @media (max-width: 800px) {
-  .results-grid,
+  .results-grid-two,
   .code-grid {
     grid-template-columns: 1fr;
   }
