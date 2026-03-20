@@ -16,7 +16,21 @@
 
       <nav class="sidebar-nav">
         <a href="index.html">Overview</a>
-        <a class="active" href="hardware.html">Hardware</a>
+
+        <div class="nav-group">
+          <a class="active" href="hardware.html">Hardware</a>
+          <div class="sidebar-subnav">
+            <a href="#hardware-summary">Hardware Summary</a>
+            <a href="#chassis-drivetrain">Chassis and Drivetrain</a>
+            <a href="#power-distribution-board">Power Distribution Board</a>
+            <a href="#microcontroller-board">Microcontroller Board</a>
+            <a href="#shoe-of-brian-interface-board">Shoe of Brian Interface Board</a>
+            <a href="#imu">IMU</a>
+            <a href="#line-sensor">Line Sensor</a>
+            <a href="#bump-sensor">Bump Sensor</a>
+          </div>
+        </div>
+
         <a href="wiring.html">Wiring</a>
         <a href="diagrams.html">FSMs &amp; Diagrams</a>
         <a href="code.html">Source Code</a>
@@ -31,7 +45,7 @@
         <p class="subtitle">Physical platform, sensing stack, and embedded control hardware</p>
       </header>
 
-      <section class="doc-section">
+      <section class="doc-section" id="hardware-summary">
         <h2>Hardware Summary</h2>
         <p>
           This page summarizes the physical hardware stack used to build our Romi robot for the
@@ -44,7 +58,7 @@
         </p>
       </section>
 
-      <section class="doc-section">
+      <section class="doc-section" id="chassis-drivetrain">
         <h2>Chassis and Drivetrain</h2>
         <p>
           Our robot used a Pololu Romi differential-drive chassis as the mechanical foundation of the
@@ -126,7 +140,7 @@
         </figure>
       </section>
 
-      <section class="doc-section">
+      <section class="doc-section" id="power-distribution-board">
         <h2>Power Distribution Board</h2>
         <p>
           The power distribution board served as the electrical hub of the robot by routing battery
@@ -170,7 +184,7 @@
         </figure>
       </section>
 
-      <section class="doc-section">
+      <section class="doc-section" id="microcontroller-board">
         <h2>Microcontroller Board</h2>
         <p>
           The embedded compute core of the robot was an STM32 Nucleo L476RG board running
@@ -222,7 +236,7 @@
         </figure>
       </section>
 
-      <section class="doc-section">
+      <section class="doc-section" id="shoe-of-brian-interface-board">
         <h2>Shoe of Brian Interface Board</h2>
         <p>
           The modified Shoe of Brian board expanded the Nucleo into a more usable robotics interface
@@ -266,7 +280,7 @@
         </figure>
       </section>
 
-      <section class="doc-section">
+      <section class="doc-section" id="imu">
         <h2>IMU</h2>
         <p>
           A BNO055 inertial measurement unit provided heading information for turning control,
@@ -312,7 +326,7 @@
         </figure>
       </section>
 
-      <section class="doc-section">
+      <section class="doc-section" id="line-sensor">
         <h2>Line Sensor</h2>
         <p>
           A Pololu QTRX-MD-07A reflectance sensor array provided the main line-following signal for
@@ -353,7 +367,7 @@
         </figure>
       </section>
 
-      <section class="doc-section">
+      <section class="doc-section" id="bump-sensor">
         <h2>Bump Sensor</h2>
         <p>
           Left and right bumper switch assemblies provided event-based contact detection for wall
