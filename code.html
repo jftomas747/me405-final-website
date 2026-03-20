@@ -13,6 +13,7 @@
         <h1>ME405 Final Project</h1>
         <p>MECH13</p>
       </div>
+
       <nav class="sidebar-nav">
         <a href="index.html">Overview</a>
         <a href="hardware.html">Hardware</a>
@@ -27,54 +28,135 @@
     <main class="content">
       <header class="doc-header">
         <h1>Source Code</h1>
-        <p class="subtitle">Multitask software organization and repository links</p>
+        <p class="subtitle">Software organization, major modules, and repository links</p>
       </header>
 
       <section class="doc-section">
         <h2>Code / Software Architecture</h2>
+
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-label">Scheduled Tasks</span>
+            <span class="stat-value">6</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Scheduler</span>
+            <span class="stat-value">Round-Robin</span>
+          </div>
+        </div>
+
         <p>
-          Our software was organized as a multitask robot control system running on the Nucleo.
-          The user interface handled runtime configuration of gains and setpoints, the motor tasks
-          performed closed-loop PI velocity control using encoder feedback, the line sensor task
-          handled steering corrections, and the IMU/state-estimation tasks provided smoother heading
-          and motion information for higher-level navigation.
+          Our software was organized as a cooperative multitasking control system running on the
+          STM32 Nucleo. The main program creates the hardware interfaces, allocates the shared
+          variables, instantiates each task, and then runs the cotask scheduler continuously during
+          operation.
         </p>
+
+        <p>
+          The final program is divided into six scheduled behaviors: left motor control, right motor
+          control, bump sensing, observer/state estimation, high-level navigation, and the user
+          interface. These tasks communicate through shared variables so that sensing, control, and
+          decision making can happen together without putting all robot behavior inside one large loop.
+        </p>
+
+        <p>
+          In addition to those scheduled tasks, the software also includes dedicated drivers for the
+          motor hardware, quadrature encoders, line sensor array, IMU, and bumper inputs. Together,
+          these files form the full control stack used during the final obstacle-course runs.
+        </p>
+      </section>
+
+      <section class="doc-section">
+        <h2>Main Files and Repository Structure</h2>
 
         <div class="code-grid">
           <div class="code-card">
             <h3>main.py</h3>
-            <p>Main startup file that creates hardware objects, shared variables, and launches the scheduler.</p>
+            <p>
+              Main startup file. Initializes motors, encoders, line sensors, bump sensors, I2C, and
+              IMU; creates shares and queues; instantiates all tasks; and starts the scheduler.
+            </p>
             <a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/main.py" target="_blank" rel="noopener noreferrer">View file</a>
           </div>
 
           <div class="code-card">
-            <h3>Motor Control</h3>
-            <ul>
-              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/motor_driver.py" target="_blank" rel="noopener noreferrer">motor_driver.py</a></li>
-              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/encoder.py" target="_blank" rel="noopener noreferrer">encoder.py</a></li>
-              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_motor.py" target="_blank" rel="noopener noreferrer">task_motor.py</a></li>
-            </ul>
+            <h3>task_user.py</h3>
+            <p>
+              USB serial user interface for calibration, mission start/stop, and runtime tuning of
+              base speed, line gains, and motor gains.
+            </p>
+            <a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_user.py" target="_blank" rel="noopener noreferrer">View file</a>
           </div>
 
           <div class="code-card">
-            <h3>Line Following &amp; Navigation</h3>
-            <ul>
-              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/linesensor_driver.py" target="_blank" rel="noopener noreferrer">linesensor_driver.py</a></li>
-              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_navigator.py" target="_blank" rel="noopener noreferrer">task_navigator.py</a></li>
-            </ul>
+            <h3>task_motor.py</h3>
+            <p>
+              Left and right motor tasks. Each task updates its encoder, computes velocity error,
+              applies saturated motor effort, and publishes wheel motion data.
+            </p>
+            <a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_motor.py" target="_blank" rel="noopener noreferrer">View file</a>
           </div>
 
           <div class="code-card">
-            <h3>IMU &amp; Estimation</h3>
-            <ul>
-              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/imu_driver.py" target="_blank" rel="noopener noreferrer">imu_driver.py</a></li>
-              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/estimator.py" target="_blank" rel="noopener noreferrer">estimator.py</a></li>
-              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_estimator.py" target="_blank" rel="noopener noreferrer">task_estimator.py</a></li>
-            </ul>
+            <h3>task_navigator.py</h3>
+            <p>
+              Top-level autonomous navigation FSM. Handles line following, heading-hold motion, wall
+              interaction, dot detection, turnaround, and final return-to-finish logic.
+            </p>
+            <a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_navigator.py" target="_blank" rel="noopener noreferrer">View file</a>
           </div>
 
           <div class="code-card">
-            <h3>Bump Sensing</h3>
+            <h3>task_estimator.py</h3>
+            <p>
+              Observer task that combines wheel motion and IMU heading information to estimate
+              traveled distance, heading, and robot position.
+            </p>
+            <a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_estimator.py" target="_blank" rel="noopener noreferrer">View file</a>
+          </div>
+
+          <div class="code-card">
+            <h3>linesensor_driver.py</h3>
+            <p>
+              Seven-channel reflectance sensor driver with white/black calibration, line visibility,
+              dot counting, and centroid calculation for steering.
+            </p>
+            <a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/linesensor_driver.py" target="_blank" rel="noopener noreferrer">View file</a>
+          </div>
+
+          <div class="code-card">
+            <h3>motor_driver.py</h3>
+            <p>
+              Low-level H-bridge motor driver with PWM effort, direction control, and enable/disable
+              functionality for each Romi motor.
+            </p>
+            <a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/motor_driver.py" target="_blank" rel="noopener noreferrer">View file</a>
+          </div>
+
+          <div class="code-card">
+            <h3>encoder.py</h3>
+            <p>
+              Quadrature encoder driver that updates wheel position and computes wheel velocity from
+              timer-based encoder counts.
+            </p>
+            <a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/encoder.py" target="_blank" rel="noopener noreferrer">View file</a>
+          </div>
+
+          <div class="code-card">
+            <h3>imu_driver.py</h3>
+            <p>
+              BNO055 IMU interface over I2C, including fusion-mode changes, calibration status,
+              stored calibration loading/saving, and yaw/yaw-rate access.
+            </p>
+            <a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/imu_driver.py" target="_blank" rel="noopener noreferrer">View file</a>
+          </div>
+
+          <div class="code-card">
+            <h3>bump_sensor.py / task_bump.py</h3>
+            <p>
+              Bumper hardware interface and scheduled bump task. Debounces inputs, forms a bitmask,
+              and reports wall-contact events during the run.
+            </p>
             <ul>
               <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/bump_sensor.py" target="_blank" rel="noopener noreferrer">bump_sensor.py</a></li>
               <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_bump.py" target="_blank" rel="noopener noreferrer">task_bump.py</a></li>
@@ -82,12 +164,23 @@
           </div>
 
           <div class="code-card">
-            <h3>Task Framework &amp; UI</h3>
+            <h3>estimator.py</h3>
+            <p>
+              Observer model matrices and update function used by the scheduled observer task to
+              propagate the robot state estimate.
+            </p>
+            <a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/estimator.py" target="_blank" rel="noopener noreferrer">View file</a>
+          </div>
+
+          <div class="code-card">
+            <h3>cotask.py / task_share.py</h3>
+            <p>
+              Cooperative scheduler, task definitions, shared-variable objects, and queue structures
+              used throughout the project.
+            </p>
             <ul>
               <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/cotask.py" target="_blank" rel="noopener noreferrer">cotask.py</a></li>
               <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_share.py" target="_blank" rel="noopener noreferrer">task_share.py</a></li>
-              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_user.py" target="_blank" rel="noopener noreferrer">task_user.py</a></li>
-              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_start_button.py" target="_blank" rel="noopener noreferrer">task_start_button.py</a></li>
             </ul>
           </div>
         </div>
@@ -96,6 +189,202 @@
           <a class="repo-button" href="https://github.com/KadenGuevarra/ME405_Final_MECH13" target="_blank" rel="noopener noreferrer">
             View Full Repository
           </a>
+        </p>
+      </section>
+
+      <section class="doc-section">
+        <h2>Detailed Module Description</h2>
+
+        <h3>main.py</h3>
+        <p>
+          The <code>main.py</code> file is the entry point for the robot. It builds the two motor
+          drivers, two encoders, the seven-sensor line array, the six bumper inputs, and the BNO055
+          IMU interface. After that, it allocates the system shares for commands, tuning parameters,
+          setpoints, estimated states, and bump events. Finally, it creates the six scheduled tasks
+          and runs them using the round-robin scheduler.
+        </p>
+
+        <p>
+          This file is also where the default starting parameters are loaded. At startup, the left
+          and right motor gains are both set to 0.20, the base speed is set to 45.0, and the line
+          following gains are initialized to <code>Kp = 3.0</code> and <code>Ki = 0.02</code>.
+        </p>
+
+        <h3>Motor Control Layer</h3>
+        <p>
+          The low-level motor control is split across <code>motor_driver.py</code>,
+          <code>encoder.py</code>, and <code>task_motor.py</code>. The driver file handles PWM,
+          direction, and motor enable. The encoder file reads quadrature counts and converts them
+          into wheel position and velocity. The scheduled motor task ties them together.
+        </p>
+
+        <p>
+          Each motor task moves through three states: initialize, wait, and run. In the run state,
+          the encoder is updated, the measured velocity is compared with the requested setpoint, and
+          a saturated control effort is applied using the motor gain share. The task also publishes
+          the current motor effort and wheel distance back to the rest of the system.
+        </p>
+
+        <h3>Line Sensing</h3>
+        <p>
+          The line sensor driver is responsible for reading the seven analog reflectance sensors and
+          converting those values into usable navigation information. It stores white and black
+          calibration values, computes normalized readings, detects whether a line is visible, counts
+          dark regions for dot detection, and computes a centroid used for steering correction.
+        </p>
+
+        <p>
+          This module is not scheduled as its own cotask, but it is heavily used by both the user
+          task and the navigator. The user task calls it during calibration, while the navigator uses
+          its centroid, line visibility, and dark-count outputs during autonomous motion.
+        </p>
+
+        <h3>User Interface and Runtime Tuning</h3>
+        <p>
+          The user interface lives in <code>task_user.py</code> and communicates over
+          <code>USB_VCP</code>. It presents a command menu that allows the operator to print help,
+          calibrate the line sensor, start the mission, stop the mission, and change the base speed,
+          line gains, or motor gains while testing.
+        </p>
+
+        <p>
+          This task is important because it gives the robot a clean setup workflow. Instead of hard
+          coding every value before each run, the operator can calibrate the line sensor and adjust
+          the main tuning parameters directly through the interface.
+        </p>
+
+        <h3>Observer and IMU Support</h3>
+        <p>
+          The IMU and observer logic are split across <code>imu_driver.py</code>,
+          <code>estimator.py</code>, and <code>task_estimator.py</code>. The IMU driver configures
+          the BNO055 over I2C, loads or saves calibration coefficients, changes operating modes, and
+          provides yaw and yaw-rate measurements.
+        </p>
+
+        <p>
+          The observer task reads left and right motor effort, left and right wheel distance, and the
+          IMU yaw signals. It then calls the estimator model to update the state estimate and publishes
+          the estimated traveled distance <code>sHat</code>, heading <code>psiHat</code>, and robot
+          position <code>xR</code> and <code>yR</code>. This gives the navigator more reliable motion
+          information than line sensing alone.
+        </p>
+
+        <h3>Navigation Logic</h3>
+        <p>
+          The top-level autonomous behavior is implemented in <code>task_navigator.py</code>. This
+          file contains the main finite state machine that decides what the robot should do at each
+          stage of the course. It does not drive the PWM hardware directly. Instead, it sets left and
+          right wheel setpoints that the motor tasks track.
+        </p>
+
+        <p>
+          The navigator includes 14 states: wait, CP0 to CP1 line following, box stop, short forward
+          motion, right turn, drive to wall, backup to line, left turn back to line, CP2 to CP3 line
+          following, CP3 to dot search, hit-dot forward motion, turnaround, CP4 to finish, and the
+          finished state. Depending on the state, it uses line following, heading hold, or turning
+          behavior.
+        </p>
+
+        <p>
+          For line following, the navigator reads the line centroid and applies proportional-integral
+          steering correction around the base speed. For turning and heading-hold motion, it uses the
+          estimated heading and a heading gain to generate left/right wheel commands. This makes the
+          navigation task the highest-level behavior coordinator in the project.
+        </p>
+
+        <h3>Bump Detection</h3>
+        <p>
+          Wall contact detection is handled by <code>bump_sensor.py</code> and
+          <code>task_bump.py</code>. The bumper driver configures three right-side and three left-side
+          bumper inputs with pull-ups and debounce timing, then exposes a contact bitmask. The bump
+          task runs periodically, updates the bumper states, publishes that bitmask, and can optionally
+          stop the robot if a bump event occurs.
+        </p>
+
+        <p>
+          In the final system, the bump task mainly serves as an event publisher for navigation. When
+          the box-wall section is reached, the navigator watches the bump mask and uses that event to
+          transition into the backup-and-return sequence.
+        </p>
+
+        <h3>Scheduler and Inter-Task Communication</h3>
+        <p>
+          The cooperative task framework is provided by <code>cotask.py</code> and
+          <code>task_share.py</code>. The scheduler runs each generator-style task in turn, while the
+          share and queue classes provide a safe way to exchange values such as motor commands, sensor
+          outputs, estimated states, and event flags.
+        </p>
+
+        <p>
+          Even though the task objects store priorities and periods, the final program uses the
+          round-robin scheduler call <code>task_list.rr_sched()</code> inside the main loop. The bump
+          task is scheduled at 10 ms, while the other five scheduled tasks are each assigned a 20 ms
+          period.
+        </p>
+      </section>
+
+      <section class="doc-section">
+        <h2>Task Timing Summary</h2>
+
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Period</th>
+                <th>Main Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Left Motor Task</td>
+                <td>20 ms</td>
+                <td>Encoder update, velocity error, and left motor effort output</td>
+              </tr>
+              <tr>
+                <td>Right Motor Task</td>
+                <td>20 ms</td>
+                <td>Encoder update, velocity error, and right motor effort output</td>
+              </tr>
+              <tr>
+                <td>Bump Task</td>
+                <td>10 ms</td>
+                <td>Bumper debounce, bitmask generation, and bump-event reporting</td>
+              </tr>
+              <tr>
+                <td>Observer Task</td>
+                <td>20 ms</td>
+                <td>Estimated distance, heading, and robot-position update</td>
+              </tr>
+              <tr>
+                <td>Navigator Task</td>
+                <td>20 ms</td>
+                <td>Top-level FSM for course sequencing and motion commands</td>
+              </tr>
+              <tr>
+                <td>User Interface Task</td>
+                <td>20 ms</td>
+                <td>Calibration, parameter entry, and mission control</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="doc-section">
+        <h2>Summary</h2>
+        <p>
+          Our final codebase was organized around a modular cooperative-task structure. Low-level
+          files handled hardware such as motors, encoders, bumpers, the line sensor array, and the
+          IMU. Mid-level software handled motor commands and observer-based state estimation. At the
+          highest level, the navigator selected the robot behavior needed for each section of the
+          final course.
+        </p>
+
+        <p>
+          This structure made the project easier to debug, easier to tune, and easier to explain.
+          Instead of writing one long control script, the project was divided into small files with
+          clear jobs and well-defined connections through shared variables.
         </p>
       </section>
     </main>
