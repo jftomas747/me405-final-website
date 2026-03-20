@@ -13,6 +13,7 @@
         <h1>ME405 Final Project</h1>
         <p>MECH13</p>
       </div>
+
       <nav class="sidebar-nav">
         <a href="index.html">Overview</a>
         <a class="active" href="hardware.html">Hardware</a>
@@ -27,53 +28,353 @@
     <main class="content">
       <header class="doc-header">
         <h1>Hardware</h1>
-        <p class="subtitle">Base platform, added sensors, and mechanical layout</p>
+        <p class="subtitle">Physical platform, sensing stack, and embedded control hardware</p>
       </header>
 
       <section class="doc-section">
-        <h2>Base Platform</h2>
+        <h2>Hardware Summary</h2>
         <p>
-          Our robot was built on the standard Romi platform used throughout the course. The core
-          hardware stack included the Romi chassis with motors, encoders, wheels, and casters,
-          along with a Nucleo L476RG, a modified Shoe of Brian, and a BNO055 IMU breakout board.
+          This page summarizes the physical hardware stack used to build our Romi robot for the
+          ME405 final project, with emphasis on the components that directly supported reliable line
+          sensing, repeatable closed-loop motion, and autonomous obstacle-course navigation. Our
+          final system combined a differential-drive mobile base with embedded control hardware,
+          inertial sensing, line sensing, bump sensing, and supporting interface electronics so that
+          the robot could make navigation decisions from real sensor measurements rather than open-loop
+          assumptions alone.
         </p>
       </section>
 
       <section class="doc-section">
-        <h2>Added Sensors and Components</h2>
+        <h2>Chassis and Drivetrain</h2>
         <p>
-          To support autonomous track navigation, we added a QTRX-MD-07A 7-channel analog reflectance
-          sensor array and left/right bumper switch assemblies. These sensors allowed the robot to
-          follow the printed track while also detecting wall contact during navigation.
+          Our robot used a Pololu Romi differential-drive chassis as the mechanical foundation of the
+          system. This platform integrates the main structure, drive motors, wheels, and encoders into
+          a compact and repeatable base that is well suited for embedded motion control. For our
+          project, the drivetrain provided the physical basis for closed-loop velocity control,
+          distance-based maneuvers, and heading estimation during line following and turning.
         </p>
-      </section>
 
-      <section class="doc-section">
-        <h2>Mechanical Layout</h2>
-        <p>
-          The line sensor was mounted near the front underside of the robot using stand-offs so it
-          could read the track close to the ground. The bumper switches were mounted at the front
-          so they would contact the wall before the line sensor or front hardware made impact.
-          The IMU was incorporated into the robot stack to support heading estimation during turns.
-        </p>
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Value</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Wheel radius</td>
+              <td>0.035 m</td>
+              <td>Used for distance and velocity estimation from wheel motion</td>
+            </tr>
+            <tr>
+              <td>Track width</td>
+              <td>0.141 m</td>
+              <td>Used for heading and turning kinematics</td>
+            </tr>
+            <tr>
+              <td>Encoder resolution</td>
+              <td>1437.1 ticks/rev</td>
+              <td>Used to convert encoder counts into wheel rotation and displacement</td>
+            </tr>
+          </tbody>
+        </table>
 
         <figure class="doc-figure">
-          <img
-            src="https://github.com/user-attachments/assets/59b8538a-9f08-433e-8024-1bff118f0d29"
-            alt="Photo of our Romi robot"
-          />
-          <figcaption>Physical layout of the final Romi build.</figcaption>
+          <img src="images/SS_romi_documentation.png" alt="Pololu Romi documentation image" />
+          <figcaption>Documentation provided by Pololu Robotics.</figcaption>
+        </figure>
+
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th>Hardware</th>
+              <th>Technical role in the system</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Romi chassis and power distribution</td>
+              <td>Mechanical structure and integrated support for embedded electronics and wiring</td>
+            </tr>
+            <tr>
+              <td>DC gearmotors</td>
+              <td>Bidirectional actuation through PWM effort control</td>
+            </tr>
+            <tr>
+              <td>Quadrature encoders</td>
+              <td>Wheel position and speed feedback for closed-loop control and estimation</td>
+            </tr>
+            <tr>
+              <td>Wheels and caster</td>
+              <td>Ground interface that defines traction, mobility, and kinematic scaling</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <figure class="doc-figure">
+          <img src="images/romi_chassis_top.png" alt="Romi chassis top view" />
+          <figcaption>
+            Romi chassis and drivetrain assembly used as the mechanical and electrical foundation for
+            all sensing and control subsystems.
+          </figcaption>
         </figure>
       </section>
 
       <section class="doc-section">
-        <h2>Hardware List and Product Links</h2>
-        <ul>
-          <li><a href="https://www.pololu.com/product/3500" target="_blank" rel="noopener noreferrer">Pololu Romi Chassis Kit</a></li>
-          <li><a href="https://www.pololu.com/product/4447" target="_blank" rel="noopener noreferrer">Pololu QTRX-MD-07A Reflectance Sensor Array</a></li>
-          <li><a href="https://www.pololu.com/product/3673" target="_blank" rel="noopener noreferrer">Pololu Left Bumper Switch Assembly</a></li>
-          <li><a href="https://www.pololu.com/product/3674" target="_blank" rel="noopener noreferrer">Pololu Right Bumper Switch Assembly</a></li>
-        </ul>
+        <h2>Power Distribution Board</h2>
+        <p>
+          The power distribution board served as the electrical hub of the robot by routing battery
+          power to the drivetrain and controller hardware while providing a consistent ground reference
+          for the rest of the system. In practice, this simplified bring-up and troubleshooting by
+          reducing wiring clutter and centralizing the main power connections used during repeated
+          testing and final competition runs.
+        </p>
+
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Technical role in the system</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Battery input and distribution</td>
+              <td>Routes supply power to the motors and control electronics</td>
+            </tr>
+            <tr>
+              <td>Ground reference distribution</td>
+              <td>Provides a common return path for digital, analog, and actuation subsystems</td>
+            </tr>
+            <tr>
+              <td>Modular connection points</td>
+              <td>Simplifies inspection, rework, and repeated hardware iteration</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <figure class="doc-figure">
+          <img src="images/pwr_distribution_board.png" alt="Power distribution board" />
+          <figcaption>
+            Power distribution board used to centralize battery power and ground routing for the
+            drivetrain and embedded electronics.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="doc-section">
+        <h2>Microcontroller Board</h2>
+        <p>
+          The embedded compute core of the robot was an STM32 Nucleo L476RG board running
+          MicroPython. This controller executed the cooperative task architecture used throughout the
+          project and provided the timers, PWM outputs, GPIO, ADC channels, and serial interfaces
+          needed for motor control, encoder measurement, line sensing, bump sensing, and IMU
+          communication.
+        </p>
+
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th>Peripheral</th>
+              <th>Application in this project</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Timers and PWM</td>
+              <td>Motor effort generation and timing support for periodic task execution</td>
+            </tr>
+            <tr>
+              <td>Encoder timers</td>
+              <td>Quadrature counting for wheel position and speed measurement</td>
+            </tr>
+            <tr>
+              <td>ADC inputs</td>
+              <td>Used for analog line-sensor measurements</td>
+            </tr>
+            <tr>
+              <td>UART / serial</td>
+              <td>User interface, debugging, and tuning feedback during testing</td>
+            </tr>
+            <tr>
+              <td>I2C</td>
+              <td>Communication with the BNO055 IMU</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <figure class="doc-figure">
+          <img src="images/NUCLEO-L476RG.png" alt="STM32 Nucleo L476RG board" />
+          <figcaption>
+            STM32 Nucleo L476RG providing real-time I/O, timers, communication interfaces, and
+            embedded execution for the robot firmware.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="doc-section">
+        <h2>Shoe of Brian Interface Board</h2>
+        <p>
+          The modified Shoe of Brian board expanded the Nucleo into a more usable robotics interface
+          by providing structured breakout connections for sensors, motors, and supporting wiring.
+          In our build, this board reduced wiring complexity, improved signal organization, and made it
+          easier to connect the Romi drivetrain, IMU, line sensor, and bump switches without rewiring
+          the controller directly every time the layout changed.
+        </p>
+
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Structured header breakout</td>
+              <td>Clean signal routing to motors, encoders, sensors, and communication hardware</td>
+            </tr>
+            <tr>
+              <td>Shared ground distribution</td>
+              <td>Stable electrical reference for mixed analog and digital subsystems</td>
+            </tr>
+            <tr>
+              <td>Rapid reconfiguration</td>
+              <td>Supports changes to pin mapping and wiring during iterative development</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <figure class="doc-figure">
+          <img src="images/shoe_of_brian.png" alt="Shoe of Brian interface board" />
+          <figcaption>
+            Modified Shoe of Brian interface board used to organize wiring and support hardware
+            integration across the final robot.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="doc-section">
+        <h2>IMU</h2>
+        <p>
+          A BNO055 inertial measurement unit provided heading information for turning control,
+          state estimation, and general motion awareness during the course. In our project, the IMU
+          was especially useful during state-based turning actions and in the observer-based estimator,
+          where heading measurements were used alongside encoder data to improve navigation behavior.
+        </p>
+
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Value</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sensor</td>
+              <td>BNO055</td>
+              <td>9-axis IMU with onboard fusion support</td>
+            </tr>
+            <tr>
+              <td>Bus</td>
+              <td>I2C</td>
+              <td>Connected to the microcontroller through SCL and SDA lines</td>
+            </tr>
+            <tr>
+              <td>I2C address</td>
+              <td>0x28</td>
+              <td>Default initialization address used in the project</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <figure class="doc-figure">
+          <img src="images/bno055_module.png" alt="BNO055 IMU module" />
+          <figcaption>
+            BNO055 IMU used to provide real-time heading feedback for turning and estimation.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="doc-section">
+        <h2>Line Sensor</h2>
+        <p>
+          A Pololu QTRX-MD-07A reflectance sensor array provided the main line-following signal for
+          the robot. This sensor measured the reflectance profile beneath the front of the robot and
+          allowed the software to compute a centroid-style tracking error for steering correction.
+          Because line following was the dominant navigation mode on the course, the mounting height
+          and alignment of the sensor were treated as important design parameters in order to keep
+          the reflectance geometry consistent across runs.
+        </p>
+
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th>Hardware</th>
+              <th>Technical role in the system</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>QTRX-MD-07A reflectance array</td>
+              <td>Measures surface reflectance for line detection and lateral tracking error</td>
+            </tr>
+            <tr>
+              <td>Front mounting bracket / stand-off arrangement</td>
+              <td>Maintains repeatable sensor height and alignment relative to the floor</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <figure class="doc-figure">
+          <img src="images/IR_sensor_image.png" alt="QTR line sensor array" />
+          <figcaption>
+            QTR reflectance sensor array mounted to maintain a controlled standoff distance for
+            consistent line contrast and tracking performance.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="doc-section">
+        <h2>Bump Sensor</h2>
+        <p>
+          Left and right bumper switch assemblies provided event-based contact detection for wall
+          interaction and recovery behavior. These bump sensors were placed at the front of the robot
+          so that a collision with the wall could be detected cleanly before the line sensor or other
+          front hardware was damaged. In the navigation logic, bumper activation was used as a direct
+          trigger for backing up and transitioning into the next maneuver.
+        </p>
+
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th>Hardware</th>
+              <th>Technical role in the system</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Left and right bumper switch assemblies</td>
+              <td>Discrete contact-triggered event inputs for collision detection and recovery logic</td>
+            </tr>
+            <tr>
+              <td>Front-mounted trigger geometry</td>
+              <td>Ensures reliable wall contact sensing before sensitive front hardware is impacted</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <figure class="doc-figure">
+          <img src="images/bump_sensor.png" alt="Bump sensor assembly" />
+          <figcaption>
+            Bump sensor assembly providing discrete event triggers used by navigation for contact
+            response and recovery.
+          </figcaption>
+        </figure>
       </section>
     </main>
   </div>
