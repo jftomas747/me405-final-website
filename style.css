@@ -175,6 +175,36 @@ a:hover {
   color: #555;
 }
 
+.diagram-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.diagram-card {
+  background: #fafaf7;
+  border: 1px solid #e2e6dc;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 0;
+}
+
+.diagram-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+}
+
+.diagram-card figcaption {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.5;
+}
+
 .code-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -214,9 +244,15 @@ a:hover {
   color: #f4d03f;
 }
 
-@media (max-width: 800px) {
-  .results-grid-two,
+@media (max-width: 900px) {
+  .diagram-grid,
   .code-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .results-grid-two {
     grid-template-columns: 1fr;
   }
 }
