@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ME405 Final Project - MECH13 | Source Code</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <aside class="sidebar">
+      <div class="sidebar-title">
+        <h1>ME405 Final Project</h1>
+        <p>MECH13</p>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="index.html">Overview</a>
+        <a href="hardware.html">Hardware</a>
+        <a href="wiring.html">Wiring</a>
+        <a href="diagrams.html">FSMs &amp; Diagrams</a>
+        <a class="active" href="code.html">Source Code</a>
+        <a href="results.html">Results</a>
+        <a href="video.html">Video Demo</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <header class="doc-header">
+        <h1>Source Code</h1>
+        <p class="subtitle">Multitask software organization and repository links</p>
+      </header>
+
+      <section class="doc-section">
+        <h2>Code / Software Architecture</h2>
+        <p>
+          Our software was organized as a multitask robot control system running on the Nucleo.
+          The user interface handled runtime configuration of gains and setpoints, the motor tasks
+          performed closed-loop PI velocity control using encoder feedback, the line sensor task
+          handled steering corrections, and the IMU/state-estimation tasks provided smoother heading
+          and motion information for higher-level navigation.
+        </p>
+
+        <div class="code-grid">
+          <div class="code-card">
+            <h3>main.py</h3>
+            <p>Main startup file that creates hardware objects, shared variables, and launches the scheduler.</p>
+            <a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/main.py" target="_blank" rel="noopener noreferrer">View file</a>
+          </div>
+
+          <div class="code-card">
+            <h3>Motor Control</h3>
+            <ul>
+              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/motor_driver.py" target="_blank" rel="noopener noreferrer">motor_driver.py</a></li>
+              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/encoder.py" target="_blank" rel="noopener noreferrer">encoder.py</a></li>
+              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_motor.py" target="_blank" rel="noopener noreferrer">task_motor.py</a></li>
+            </ul>
+          </div>
+
+          <div class="code-card">
+            <h3>Line Following &amp; Navigation</h3>
+            <ul>
+              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/linesensor_driver.py" target="_blank" rel="noopener noreferrer">linesensor_driver.py</a></li>
+              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_navigator.py" target="_blank" rel="noopener noreferrer">task_navigator.py</a></li>
+            </ul>
+          </div>
+
+          <div class="code-card">
+            <h3>IMU &amp; Estimation</h3>
+            <ul>
+              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/imu_driver.py" target="_blank" rel="noopener noreferrer">imu_driver.py</a></li>
+              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/estimator.py" target="_blank" rel="noopener noreferrer">estimator.py</a></li>
+              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_estimator.py" target="_blank" rel="noopener noreferrer">task_estimator.py</a></li>
+            </ul>
+          </div>
+
+          <div class="code-card">
+            <h3>Bump Sensing</h3>
+            <ul>
+              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/bump_sensor.py" target="_blank" rel="noopener noreferrer">bump_sensor.py</a></li>
+              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_bump.py" target="_blank" rel="noopener noreferrer">task_bump.py</a></li>
+            </ul>
+          </div>
+
+          <div class="code-card">
+            <h3>Task Framework &amp; UI</h3>
+            <ul>
+              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/cotask.py" target="_blank" rel="noopener noreferrer">cotask.py</a></li>
+              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_share.py" target="_blank" rel="noopener noreferrer">task_share.py</a></li>
+              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_user.py" target="_blank" rel="noopener noreferrer">task_user.py</a></li>
+              <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_start_button.py" target="_blank" rel="noopener noreferrer">task_start_button.py</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <p>
+          <a class="repo-button" href="https://github.com/KadenGuevarra/ME405_Final_MECH13" target="_blank" rel="noopener noreferrer">
+            View Full Repository
+          </a>
+        </p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
