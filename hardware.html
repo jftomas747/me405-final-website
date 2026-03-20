@@ -54,64 +54,68 @@
           distance-based maneuvers, and heading estimation during line following and turning.
         </p>
 
-        <table class="doc-table">
-          <thead>
-            <tr>
-              <th>Parameter</th>
-              <th>Value</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Wheel radius</td>
-              <td>0.035 m</td>
-              <td>Used for distance and velocity estimation from wheel motion</td>
-            </tr>
-            <tr>
-              <td>Track width</td>
-              <td>0.141 m</td>
-              <td>Used for heading and turning kinematics</td>
-            </tr>
-            <tr>
-              <td>Encoder resolution</td>
-              <td>1437.1 ticks/rev</td>
-              <td>Used to convert encoder counts into wheel rotation and displacement</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th scope="col">Parameter</th>
+                <th scope="col">Value</th>
+                <th scope="col">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Wheel radius</td>
+                <td>0.035 m</td>
+                <td>Used for distance and velocity estimation from wheel motion</td>
+              </tr>
+              <tr>
+                <td>Track width</td>
+                <td>0.141 m</td>
+                <td>Used for heading and turning kinematics</td>
+              </tr>
+              <tr>
+                <td>Encoder resolution</td>
+                <td>1437.1 ticks/rev</td>
+                <td>Used to convert encoder counts into wheel rotation and displacement</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
         <figure class="doc-figure">
           <img src="images/SS_romi_documentation.png" alt="Pololu Romi documentation image" />
           <figcaption>Documentation provided by Pololu Robotics.</figcaption>
         </figure>
 
-        <table class="doc-table">
-          <thead>
-            <tr>
-              <th>Hardware</th>
-              <th>Technical role in the system</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Romi chassis and power distribution</td>
-              <td>Mechanical structure and integrated support for embedded electronics and wiring</td>
-            </tr>
-            <tr>
-              <td>DC gearmotors</td>
-              <td>Bidirectional actuation through PWM effort control</td>
-            </tr>
-            <tr>
-              <td>Quadrature encoders</td>
-              <td>Wheel position and speed feedback for closed-loop control and estimation</td>
-            </tr>
-            <tr>
-              <td>Wheels and caster</td>
-              <td>Ground interface that defines traction, mobility, and kinematic scaling</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th scope="col">Hardware</th>
+                <th scope="col">Technical role in the system</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Romi chassis and power distribution</td>
+                <td>Mechanical structure and integrated support for embedded electronics and wiring</td>
+              </tr>
+              <tr>
+                <td>DC gearmotors</td>
+                <td>Bidirectional actuation through PWM effort control</td>
+              </tr>
+              <tr>
+                <td>Quadrature encoders</td>
+                <td>Wheel position and speed feedback for closed-loop control and estimation</td>
+              </tr>
+              <tr>
+                <td>Wheels and caster</td>
+                <td>Ground interface that defines traction, mobility, and kinematic scaling</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
         <figure class="doc-figure">
           <img src="images/romi_chassis_top.png" alt="Romi chassis top view" />
@@ -132,28 +136,30 @@
           testing and final competition runs.
         </p>
 
-        <table class="doc-table">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Technical role in the system</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Battery input and distribution</td>
-              <td>Routes supply power to the motors and control electronics</td>
-            </tr>
-            <tr>
-              <td>Ground reference distribution</td>
-              <td>Provides a common return path for digital, analog, and actuation subsystems</td>
-            </tr>
-            <tr>
-              <td>Modular connection points</td>
-              <td>Simplifies inspection, rework, and repeated hardware iteration</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Technical role in the system</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Battery input and distribution</td>
+                <td>Routes supply power to the motors and control electronics</td>
+              </tr>
+              <tr>
+                <td>Ground reference distribution</td>
+                <td>Provides a common return path for digital, analog, and actuation subsystems</td>
+              </tr>
+              <tr>
+                <td>Modular connection points</td>
+                <td>Simplifies inspection, rework, and repeated hardware iteration</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
         <figure class="doc-figure">
           <img src="images/pwr_distribution_board.png" alt="Power distribution board" />
@@ -174,36 +180,38 @@
           communication.
         </p>
 
-        <table class="doc-table">
-          <thead>
-            <tr>
-              <th>Peripheral</th>
-              <th>Application in this project</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Timers and PWM</td>
-              <td>Motor effort generation and timing support for periodic task execution</td>
-            </tr>
-            <tr>
-              <td>Encoder timers</td>
-              <td>Quadrature counting for wheel position and speed measurement</td>
-            </tr>
-            <tr>
-              <td>ADC inputs</td>
-              <td>Used for analog line-sensor measurements</td>
-            </tr>
-            <tr>
-              <td>UART / serial</td>
-              <td>User interface, debugging, and tuning feedback during testing</td>
-            </tr>
-            <tr>
-              <td>I2C</td>
-              <td>Communication with the BNO055 IMU</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th scope="col">Peripheral</th>
+                <th scope="col">Application in this project</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Timers and PWM</td>
+                <td>Motor effort generation and timing support for periodic task execution</td>
+              </tr>
+              <tr>
+                <td>Encoder timers</td>
+                <td>Quadrature counting for wheel position and speed measurement</td>
+              </tr>
+              <tr>
+                <td>ADC inputs</td>
+                <td>Used for analog line-sensor measurements</td>
+              </tr>
+              <tr>
+                <td>UART / serial</td>
+                <td>User interface, debugging, and tuning feedback during testing</td>
+              </tr>
+              <tr>
+                <td>I2C</td>
+                <td>Communication with the BNO055 IMU</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
         <figure class="doc-figure">
           <img src="images/NUCLEO-L476RG.png" alt="STM32 Nucleo L476RG board" />
@@ -224,28 +232,30 @@
           the controller directly every time the layout changed.
         </p>
 
-        <table class="doc-table">
-          <thead>
-            <tr>
-              <th>Feature</th>
-              <th>Purpose</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Structured header breakout</td>
-              <td>Clean signal routing to motors, encoders, sensors, and communication hardware</td>
-            </tr>
-            <tr>
-              <td>Shared ground distribution</td>
-              <td>Stable electrical reference for mixed analog and digital subsystems</td>
-            </tr>
-            <tr>
-              <td>Rapid reconfiguration</td>
-              <td>Supports changes to pin mapping and wiring during iterative development</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th scope="col">Feature</th>
+                <th scope="col">Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Structured header breakout</td>
+                <td>Clean signal routing to motors, encoders, sensors, and communication hardware</td>
+              </tr>
+              <tr>
+                <td>Shared ground distribution</td>
+                <td>Stable electrical reference for mixed analog and digital subsystems</td>
+              </tr>
+              <tr>
+                <td>Rapid reconfiguration</td>
+                <td>Supports changes to pin mapping and wiring during iterative development</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
         <figure class="doc-figure">
           <img src="images/shoe_of_brian.png" alt="Shoe of Brian interface board" />
@@ -265,32 +275,34 @@
           where heading measurements were used alongside encoder data to improve navigation behavior.
         </p>
 
-        <table class="doc-table">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Value</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Sensor</td>
-              <td>BNO055</td>
-              <td>9-axis IMU with onboard fusion support</td>
-            </tr>
-            <tr>
-              <td>Bus</td>
-              <td>I2C</td>
-              <td>Connected to the microcontroller through SCL and SDA lines</td>
-            </tr>
-            <tr>
-              <td>I2C address</td>
-              <td>0x28</td>
-              <td>Default initialization address used in the project</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Value</th>
+                <th scope="col">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Sensor</td>
+                <td>BNO055</td>
+                <td>9-axis IMU with onboard fusion support</td>
+              </tr>
+              <tr>
+                <td>Bus</td>
+                <td>I2C</td>
+                <td>Connected to the microcontroller through SCL and SDA lines</td>
+              </tr>
+              <tr>
+                <td>I2C address</td>
+                <td>0x28</td>
+                <td>Default initialization address used in the project</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
         <figure class="doc-figure">
           <img src="images/bno055_module.png" alt="BNO055 IMU module" />
@@ -311,24 +323,26 @@
           the reflectance geometry consistent across runs.
         </p>
 
-        <table class="doc-table">
-          <thead>
-            <tr>
-              <th>Hardware</th>
-              <th>Technical role in the system</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>QTRX-MD-07A reflectance array</td>
-              <td>Measures surface reflectance for line detection and lateral tracking error</td>
-            </tr>
-            <tr>
-              <td>Front mounting bracket / stand-off arrangement</td>
-              <td>Maintains repeatable sensor height and alignment relative to the floor</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th scope="col">Hardware</th>
+                <th scope="col">Technical role in the system</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>QTRX-MD-07A reflectance array</td>
+                <td>Measures surface reflectance for line detection and lateral tracking error</td>
+              </tr>
+              <tr>
+                <td>Front mounting bracket / stand-off arrangement</td>
+                <td>Maintains repeatable sensor height and alignment relative to the floor</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
         <figure class="doc-figure">
           <img src="images/IR_sensor_image.png" alt="QTR line sensor array" />
@@ -349,24 +363,26 @@
           trigger for backing up and transitioning into the next maneuver.
         </p>
 
-        <table class="doc-table">
-          <thead>
-            <tr>
-              <th>Hardware</th>
-              <th>Technical role in the system</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Left and right bumper switch assemblies</td>
-              <td>Discrete contact-triggered event inputs for collision detection and recovery logic</td>
-            </tr>
-            <tr>
-              <td>Front-mounted trigger geometry</td>
-              <td>Ensures reliable wall contact sensing before sensitive front hardware is impacted</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th scope="col">Hardware</th>
+                <th scope="col">Technical role in the system</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Left and right bumper switch assemblies</td>
+                <td>Discrete contact-triggered event inputs for collision detection and recovery logic</td>
+              </tr>
+              <tr>
+                <td>Front-mounted trigger geometry</td>
+                <td>Ensures reliable wall contact sensing before sensitive front hardware is impacted</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
         <figure class="doc-figure">
           <img src="images/bump_sensor.png" alt="Bump sensor assembly" />
