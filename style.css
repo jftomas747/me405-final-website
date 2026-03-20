@@ -179,7 +179,7 @@ a:hover {
   font-style: italic;
 }
 
-/* Note boxes */
+/* Note box */
 
 .note-box {
   background: #f9fbf6;
@@ -189,7 +189,7 @@ a:hover {
   border-radius: 6px;
 }
 
-/* Grid cards */
+/* Cards / grids */
 
 .code-grid,
 .diagram-grid,
@@ -285,12 +285,17 @@ a:hover {
   text-decoration: none;
 }
 
-/* Tables with full grid formatting */
+/* Tables */
+
+.table-wrap {
+  overflow-x: auto;
+  margin: 18px 0 24px;
+}
 
 .doc-table {
   width: 100%;
+  min-width: 620px;
   border-collapse: collapse;
-  margin: 18px 0 24px;
   font-size: 0.97rem;
   background: white;
   border: 1px solid var(--table-border);
@@ -321,20 +326,102 @@ a:hover {
   background: #f5f9f1;
 }
 
-/* Optional wrapper if you decide to wrap tables later */
-.table-wrap {
-  overflow-x: auto;
-  margin: 18px 0 24px;
+.doc-table + .doc-figure,
+.doc-figure + .doc-table,
+.table-wrap + .doc-figure,
+.doc-figure + .table-wrap {
+  margin-top: 20px;
 }
 
-.table-wrap .doc-table {
+/* Wiring-specific pin coloring */
+
+.pin-power {
+  background: #ffd9d9;
+  font-weight: 700;
+}
+
+.pin-ground {
+  background: #e6e6e6;
+  font-weight: 700;
+}
+
+.pin-motor {
+  background: #d9ead3;
+  font-weight: 700;
+}
+
+.pin-encoder {
+  background: #cfe2ff;
+  font-weight: 700;
+}
+
+.pin-line {
+  background: #fff2cc;
+  font-weight: 700;
+}
+
+.pin-imu {
+  background: #ead1ff;
+  font-weight: 700;
+}
+
+.pin-bump {
+  background: #d9f2f2;
+  font-weight: 700;
+}
+
+/* Optional legend styling if you add one later */
+
+.color-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin: 12px 0 18px;
+  padding: 0;
+  list-style: none;
+}
+
+.color-legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin: 0;
 }
 
-/* Better spacing for tables near figures */
-.doc-table + .doc-figure,
-.doc-figure + .doc-table {
-  margin-top: 20px;
+.legend-swatch {
+  width: 18px;
+  height: 18px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.legend-power {
+  background: #ffd9d9;
+}
+
+.legend-ground {
+  background: #e6e6e6;
+}
+
+.legend-motor {
+  background: #d9ead3;
+}
+
+.legend-encoder {
+  background: #cfe2ff;
+}
+
+.legend-line {
+  background: #fff2cc;
+}
+
+.legend-imu {
+  background: #ead1ff;
+}
+
+.legend-bump {
+  background: #d9f2f2;
 }
 
 /* Responsive */
@@ -378,6 +465,7 @@ a:hover {
 
   .doc-table {
     font-size: 0.92rem;
+    min-width: 560px;
   }
 
   .doc-table th,
