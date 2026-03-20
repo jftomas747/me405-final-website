@@ -19,6 +19,7 @@
     <a href="#team">Team</a>
     <a href="#hardware">Hardware</a>
     <a href="#results">Results</a>
+    <a href="#code">Code</a>
     <a href="#video">Video</a>
   </nav>
 
@@ -114,155 +115,172 @@
       <div class="support-files">
         <h3>Supporting Files</h3>
         <ul>
-          <li><a href="PASTE_WIRING_MAP_LINK_HERE" target="_blank">Wiring Map</a></li>
-          <li><a href="PASTE_MECHANICAL_MAP_LINK_HERE" target="_blank">Mechanical Map</a></li>
+          <li><a href="PASTE_WIRING_MAP_LINK_HERE" target="_blank" rel="noopener noreferrer">Wiring Map</a></li>
+          <li><a href="PASTE_MECHANICAL_MAP_LINK_HERE" target="_blank" rel="noopener noreferrer">Mechanical Map</a></li>
         </ul>
       </div>
     </section>
 
     <section id="results" class="card">
-  <h2>Results</h2>
+      <h2>Results</h2>
 
-  <div class="results-grid">
-    <div class="stat-box">
-      <h3>Main Track Completion</h3>
-      <p>Completed</p>
-    </div>
-    </div>
-    <div class="stat-box">
-      <h3>Official Time</h3>
-      <p>2:00</p>
-    </div>
-  </div>
+      <div class="results-grid">
+        <div class="stat-box">
+          <h3>Main Track Completion</h3>
+          <p>Completed</p>
+        </div>
 
-  <figure class="media-card">
-    <img src="https://i.imgur.com/mQRiPmc.png" alt="ME405 term project game track" />
-    <figcaption>
-      Printed course used during the final demonstration, including the straightaway,
-      garage wall section, slalom, turnaround, and bonus cup areas.
-    </figcaption>
-  </figure>
-</section>
+        <div class="stat-box">
+          <h3>Bonus Cup Task</h3>
+          <p>Not Completed</p>
+        </div>
 
-  <p>
-    Our robot successfully completed the main required tasks of the final track, including line
-    following, turning, wall interaction, and overall path navigation. The only portion of the
-    course we did not complete was the bonus cup-pushing task. Our official completion time for
-    the track was exactly 2 minutes.
-  </p>
+        <div class="stat-box">
+          <h3>Official Time</h3>
+          <p>2:00</p>
+        </div>
+      </div>
 
-  <p>
-    In our motor tuning and control development, the best step-response behavior came from using
-    a proportional gain of <strong>Kp = 2.9</strong> and an integral gain of
-    <strong>Ki = 0.1</strong> along with motor gain of <strong>K = 0.2</strong> and set point
-    of <strong>S = 120 counts/s</strong>.
-  </p>
-
-  <p>
-    One major challenge in tuning the robot was that changing the control values often caused
-    unpredictable motor behavior. Small adjustments to the gains or the setpoint could make the
-    response less stable, less repeatable, or more difficult to control during the full track run.
-    Because of this, once we found a set of values that gave acceptable performance, we tried to
-    keep them consistent rather than continue making aggressive tuning changes right before the
-    demonstration.
-  </p>
-    
-  <p>
-    Overall, the robot demonstrated the successful integration of the major subsystems developed
-    throughout the quarter. Even though the cup task was not completed, the robot was still able
-    to perform the core navigation tasks required by the project and complete the track within the
-    official time limit.
-  </p>
-  
-
-<section id="code" class="card">
-  <h2>Code / Software Architecture</h2>
-
-  <p>
-    Our software was organized as a multitask robot control system. At a high level, the code
-    handled user interaction, motor control, encoder feedback, line sensing, bump sensing,
-    navigation, and state estimation. The project was built from the earlier labs and then
-    combined into one final program for the obstacle course.
-  </p>
-
-  <div class="code-grid">
-    <article class="code-card">
-      <h3>main.py</h3>
       <p>
-        Main startup file that creates the hardware objects, initializes shared variables,
-        and launches the task scheduler for the full robot system.
+        Our robot successfully completed the main required tasks of the final track, including line
+        following, turning, wall interaction, and overall path navigation. The only portion of the
+        course we did not complete was the bonus cup-pushing task. Our official completion time for
+        the track was exactly 2 minutes.
       </p>
-      <a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/main.py" target="_blank" rel="noopener noreferrer">View file</a>
-    </article>
 
-    <article class="code-card">
-      <h3>Motor Control</h3>
       <p>
-        Includes the motor driver, encoder reader, and motor task files used for closed-loop
-        motion control and velocity feedback.
+        In our motor tuning and control development, the best performance came from using
+        a proportional gain of <strong>Kp = 2.9</strong>, an integral gain of
+        <strong>Ki = 0.1</strong>, a motor gain of <strong>K = 0.2</strong>, and a set point of
+        <strong>S = 120 counts/s</strong>.
       </p>
-      <ul>
-        <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/motor_driver.py" target="_blank" rel="noopener noreferrer">motor_driver.py</a></li>
-        <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/encoder.py" target="_blank" rel="noopener noreferrer">encoder.py</a></li>
-        <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_motor.py" target="_blank" rel="noopener noreferrer">task_motor.py</a></li>
-      </ul>
-    </article>
 
-    <article class="code-card">
-      <h3>Line Following and Navigation</h3>
       <p>
-        These files manage line sensing, navigation behavior, and the robot’s response to the
-        printed course layout.
+        One major challenge in tuning the robot was that changing the control values often caused
+        unpredictable motor behavior. Small adjustments to the gains or the set point could make the
+        response less stable, less repeatable, or more difficult to control during the full track run.
+        Because of this, once we found a set of values that gave acceptable performance, we tried to
+        keep them consistent rather than continue making aggressive tuning changes right before the
+        demonstration.
       </p>
-      <ul>
-        <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/linesensor_driver.py" target="_blank" rel="noopener noreferrer">linesensor_driver.py</a></li>
-        <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_navigator.py" target="_blank" rel="noopener noreferrer">task_navigator.py</a></li>
-      </ul>
-    </article>
 
-    <article class="code-card">
-      <h3>IMU and State Estimation</h3>
       <p>
-        These modules support orientation sensing, observer-based estimation, and predicted
-        robot motion during navigation.
+        Overall, the robot demonstrated the successful integration of the major subsystems developed
+        throughout the quarter. Even though the cup task was not completed, the robot was still able
+        to perform the core navigation tasks required by the project and complete the track within the
+        official time limit.
       </p>
-      <ul>
-        <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/imu_driver.py" target="_blank" rel="noopener noreferrer">imu_driver.py</a></li>
-        <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/estimator.py" target="_blank" rel="noopener noreferrer">estimator.py</a></li>
-        <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_estimator.py" target="_blank" rel="noopener noreferrer">task_estimator.py</a></li>
-      </ul>
-    </article>
 
-    <article class="code-card">
-      <h3>Bump Sensing</h3>
+      <figure class="media-card">
+        <img src="https://i.imgur.com/mQRiPmc.png" alt="ME405 term project game track" />
+        <figcaption>
+          Printed course used during the final demonstration, including the straightaway,
+          garage wall section, slalom, turnaround, and bonus cup areas.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section id="code" class="card">
+      <h2>Code / Software Architecture</h2>
+
       <p>
-        These files handle bumper input and collision-triggered behavior during the obstacle
-        course.
+        Our software was organized as a multitask robot control system. At a high level, the code
+        handled user interaction, motor control, encoder feedback, line sensing, bump sensing,
+        navigation, and state estimation. The project was built from the earlier labs and then
+        combined into one final program for the obstacle course.
       </p>
-      <ul>
-        <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/bump_sensor.py" target="_blank" rel="noopener noreferrer">bump_sensor.py</a></li>
-        <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_bump.py" target="_blank" rel="noopener noreferrer">task_bump.py</a></li>
-      </ul>
-    </article>
 
-    <article class="code-card">
-      <h3>Task Framework and UI</h3>
+      <div class="code-grid">
+        <article class="code-card">
+          <h3>main.py</h3>
+          <p>
+            Main startup file that creates the hardware objects, initializes shared variables,
+            and launches the task scheduler for the full robot system.
+          </p>
+          <a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/main.py" target="_blank" rel="noopener noreferrer">View file</a>
+        </article>
+
+        <article class="code-card">
+          <h3>Motor Control</h3>
+          <p>
+            Includes the motor driver, encoder reader, and motor task files used for closed-loop
+            motion control and velocity feedback.
+          </p>
+          <ul>
+            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/motor_driver.py" target="_blank" rel="noopener noreferrer">motor_driver.py</a></li>
+            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/encoder.py" target="_blank" rel="noopener noreferrer">encoder.py</a></li>
+            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_motor.py" target="_blank" rel="noopener noreferrer">task_motor.py</a></li>
+          </ul>
+        </article>
+
+        <article class="code-card">
+          <h3>Line Following and Navigation</h3>
+          <p>
+            These files manage line sensing, navigation behavior, and the robot’s response to the
+            printed course layout.
+          </p>
+          <ul>
+            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/linesensor_driver.py" target="_blank" rel="noopener noreferrer">linesensor_driver.py</a></li>
+            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_navigator.py" target="_blank" rel="noopener noreferrer">task_navigator.py</a></li>
+          </ul>
+        </article>
+
+        <article class="code-card">
+          <h3>IMU and State Estimation</h3>
+          <p>
+            These modules support orientation sensing, observer-based estimation, and predicted
+            robot motion during navigation.
+          </p>
+          <ul>
+            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/imu_driver.py" target="_blank" rel="noopener noreferrer">imu_driver.py</a></li>
+            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/estimator.py" target="_blank" rel="noopener noreferrer">estimator.py</a></li>
+            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_estimator.py" target="_blank" rel="noopener noreferrer">task_estimator.py</a></li>
+          </ul>
+        </article>
+
+        <article class="code-card">
+          <h3>Bump Sensing</h3>
+          <p>
+            These files handle bumper input and collision-triggered behavior during the obstacle
+            course.
+          </p>
+          <ul>
+            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/bump_sensor.py" target="_blank" rel="noopener noreferrer">bump_sensor.py</a></li>
+            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_bump.py" target="_blank" rel="noopener noreferrer">task_bump.py</a></li>
+          </ul>
+        </article>
+
+        <article class="code-card">
+          <h3>Task Framework and UI</h3>
+          <p>
+            These support files manage task scheduling, shared variables, startup logic, and user
+            interaction for calibration and testing.
+          </p>
+          <ul>
+            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/cotask.py" target="_blank" rel="noopener noreferrer">cotask.py</a></li>
+            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_share.py" target="_blank" rel="noopener noreferrer">task_share.py</a></li>
+            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_user.py" target="_blank" rel="noopener noreferrer">task_user.py</a></li>
+            <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_start_button.py" target="_blank" rel="noopener noreferrer">task_start_button.py</a></li>
+          </ul>
+        </article>
+      </div>
+
+      <p class="repo-link">
+        <a href="https://github.com/KadenGuevarra/ME405_Final_MECH13" target="_blank" rel="noopener noreferrer">
+          View Full Repository
+        </a>
+      </p>
+    </section>
+
+    <section id="video" class="card">
+      <h2>Video Demo</h2>
       <p>
-        These support files manage task scheduling, shared variables, startup logic, and user
-        interaction for calibration and testing.
+        Watch the final demonstration here:
+        <a href="https://youtu.be/V55OzWEsSkU" target="_blank" rel="noopener noreferrer">
+          YouTube Demo Video
+        </a>
       </p>
-      <ul>
-        <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/cotask.py" target="_blank" rel="noopener noreferrer">cotask.py</a></li>
-        <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_share.py" target="_blank" rel="noopener noreferrer">task_share.py</a></li>
-        <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_user.py" target="_blank" rel="noopener noreferrer">task_user.py</a></li>
-        <li><a href="https://github.com/KadenGuevarra/ME405_Final_MECH13/blob/main/task_start_button.py" target="_blank" rel="noopener noreferrer">task_start_button.py</a></li>
-      </ul>
-    </article>
-  </div>
-
-  <p class="repo-link">
-    <a href="https://github.com/KadenGuevarra/ME405_Final_MECH13" target="_blank" rel="noopener noreferrer">
-      View Full Repository
-    </a>
-  </p>
-</section>
+    </section>
+  </main>
+</body>
+</html>
