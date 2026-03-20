@@ -7,116 +7,135 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>ME405 Final Project - MECH13</h1>
-    <p>Romi obstacle course robot</p>
+  <header class="site-header">
+    <div class="header-content">
+      <h1>ME405 Final Project - MECH13</h1>
+      <p>Autonomous Romi Obstacle Course Robot</p>
+    </div>
   </header>
 
+  <nav class="site-nav">
+    <a href="#overview">Overview</a>
+    <a href="#team">Team</a>
+    <a href="#hardware">Hardware</a>
+    <a href="#results">Results</a>
+    <a href="#video">Video</a>
+  </nav>
+
   <main>
-    <section>
+    <section id="overview" class="card">
       <h2>Project Overview</h2>
       <p>
-    This project combined the major sensing, actuation, and control systems developed in ME405
-    into one autonomous Romi robot capable of completing an obstacle course. Our final design
-    brought together line following, bump detection, encoder-based motion control, and IMU-based
-    state estimation into a single multitask robot system.
-  </p>
-  <p>
-    The goal of the project was to take the individual labs completed throughout the quarter and
-    integrate them into one working mechatronic platform. By the end of the project, our robot
-    was able to follow a printed path, respond to obstacles, perform turning maneuvers, and use
-    multiple sensors together to improve navigation and consistency.
-  </p>
+        This project combined the major sensing, actuation, and control systems developed in ME405
+        into one autonomous Romi robot capable of completing an obstacle course. Our final design
+        brought together line following, bump detection, encoder-based motion control, and IMU-based
+        state estimation into a single multitask robot system.
+      </p>
+      <p>
+        The goal of the project was to take the individual labs completed throughout the quarter and
+        integrate them into one working mechatronic platform. By the end of the project, our robot
+        was able to follow a printed path, respond to obstacles, perform turning maneuvers, and use
+        multiple sensors together to improve navigation and consistency.
+      </p>
     </section>
 
-    <section>
+    <section id="team" class="card">
       <h2>Team Members</h2>
-      <p>John Tomas & Kaden Guevarra</p>
+      <p>John Tomas &amp; Kaden Guevarra</p>
     </section>
 
-    <section>
+    <section id="hardware" class="card">
       <h2>Hardware / Mechanical &amp; Electrical Design</h2>
 
-  <h3>Base Platform</h3>
-  <p>
-    Our robot was built on the standard Romi platform used throughout the ME405 lab sequence.
-    The base system included the Romi chassis, DC motors, wheel encoders, a Nucleo L476RG
-    microcontroller, a modified Shoe of Brian, and a BNO055 IMU breakout board.
-  </p>
-      <img src="https://github.com/user-attachments/assets/59b8538a-9f08-433e-8024-1bff118f0d29" alt="Photo of our Romi robot" style="max-width:100%; border-radius:10px;">
+      <div class="image-wrap">
+        <img
+          src="https://github.com/user-attachments/assets/59b8538a-9f08-433e-8024-1bff118f0d29"
+          alt="Photo of our Romi robot"
+        />
+      </div>
+
+      <h3>Base Platform</h3>
+      <p>
+        Our robot was built on the standard Romi platform used throughout the ME405 lab sequence.
+        The base system included the Romi chassis, DC motors, wheel encoders, a Nucleo L476RG
+        microcontroller, a modified Shoe of Brian, and a BNO055 IMU breakout board.
+      </p>
+
+      <h3>Added Sensors and Components</h3>
+      <p>
+        To improve obstacle-course performance, we added a QTRX-MD-07A 7-channel analog reflectance
+        sensor array for line detection and right and left bumper switch assemblies for wall contact
+        sensing. These additions allowed the robot to follow the course line while also detecting
+        collisions or boundary contact during navigation.
+      </p>
+
+      <h3>Mechanical Layout</h3>
+      <p>
+        The reflectance sensor array was mounted near the front underside of the robot using stand-offs
+        so that it sat just above the ground for reliable line sensing. The bump sensors were mounted at
+        the front of the robot in a position that allowed them to contact walls before the line sensor,
+        helping protect the sensor array from impact. This layout was chosen to improve sensor reliability
+        while keeping the robot compact and functional.
+      </p>
+
+      <h3>Electrical Integration</h3>
+      <p>
+        All components were wired into the Nucleo using a common ground system. Power was distributed
+        through VIN and GND, while motors, encoders, the line sensor array, IMU, and bump sensors were
+        connected to their assigned pins on the microcontroller. This wiring arrangement allowed us to
+        combine motor control, encoder feedback, line sensing, inertial measurement, and bumper input
+        into one integrated robot system.
+      </p>
+
+      <h3>Hardware List and Product Links</h3>
+      <ul class="hardware-list">
+        <li>
+          <a href="https://www.pololu.com/product/3500" target="_blank" rel="noopener noreferrer">
+            Pololu Romi Chassis Kit
+          </a>
+        </li>
+        <li>
+          <a href="https://www.pololu.com/product/4447" target="_blank" rel="noopener noreferrer">
+            Pololu QTRX-MD-07A Reflectance Sensor Array
+          </a>
+        </li>
+        <li>
+          <a href="https://www.pololu.com/product/3673" target="_blank" rel="noopener noreferrer">
+            Pololu Left Bumper Switch Assembly for Romi/TI-RSLK MAX
+          </a>
+        </li>
+        <li>
+          <a href="https://www.pololu.com/product/3674" target="_blank" rel="noopener noreferrer">
+            Pololu Right Bumper Switch Assembly for Romi/TI-RSLK MAX
+          </a>
+        </li>
+      </ul>
+
+      <div class="support-files">
+        <h3>Supporting Files</h3>
+        <ul>
+          <li><a href="PASTE_WIRING_MAP_LINK_HERE" target="_blank">Wiring Map</a></li>
+          <li><a href="PASTE_MECHANICAL_MAP_LINK_HERE" target="_blank">Mechanical Map</a></li>
+        </ul>
+      </div>
     </section>
 
-    <h3>Added Sensors and Components</h3>
-  <p>
-    To improve obstacle-course performance, we added a QTRX-MD-07A 7-channel analog reflectance
-    sensor array for line detection and a right and left bumper switch assembly for wall contact
-    sensing. These additions allowed the robot to follow the course line while also detecting
-    collisions or boundary contact during navigation.
-  </p>
-
-  <h3>Mechanical Layout</h3>
-  <p>
-    The reflectance sensor array was mounted near the front underside of the robot using stand-offs
-    so that it sat just above the ground for reliable line sensing. The bump sensors were mounted at
-    the front of the robot in a position that allowed them to contact walls before the line sensor,
-    helping protect the sensor array from impact. This layout was chosen to improve sensor reliability
-    while keeping the robot compact and functional.
-  </p>
-
-  <h3>Electrical Integration</h3>
-  <p>
-    All components were wired into the Nucleo using a common ground system. Power was distributed
-    through VIN and GND, while motors, encoders, the line sensor array, IMU, and bump sensors were
-    connected to their assigned pins on the microcontroller. This wiring arrangement allowed us to
-    combine motor control, encoder feedback, line sensing, inertial measurement, and bumper input
-    into one integrated robot system.
-  </p>
-
-  <h3>Hardware List and Product Links</h3>
-  <ul>
-    <li>
-      <a href="https://www.pololu.com/product/3500" target="_blank" rel="noopener noreferrer">
-        Pololu Romi Chassis Kit
-      </a>
-    </li>
-    <li>
-      <a href="https://www.pololu.com/product/4447" target="_blank" rel="noopener noreferrer">
-        Pololu QTRX-MD-07A Reflectance Sensor Array
-      </a>
-    </li>
-    <li>
-      <a href="https://www.pololu.com/product/3673" target="_blank" rel="noopener noreferrer">
-        Pololu Left Bumper Switch Assembly for Romi/TI-RSLK MAX
-      </a>
-    </li>
-    <li>
-      <a href="https://www.pololu.com/product/3674" target="_blank" rel="noopener noreferrer">
-        Pololu Right Bumper Switch Assembly for Romi/TI-RSLK MAX
-      </a>
-    </li>
-  </ul>
-
-  <div class="hardware-links">
-    <p><strong>Supporting Files:</strong></p>
-    <ul>
-      <li><a href="PASTE_WIRING_MAP_LINK_HERE" target="_blank">Wiring Map</a></li>
-      <li><a href="PASTE_MECHANICAL_MAP_LINK_HERE" target="_blank">Mechanical Map</a></li>
-    </ul>
-  </div>
-
-  <div class="hardware-image">
-    <img src="images/romi.jpg" alt="Photo of the Romi robot" />
-  </div>
-</section>
-
-    <section>
+    <section id="results" class="card">
       <h2>Results</h2>
-      <p>Our robot completed the course successfully and demonstrated line following, turning, and obstacle interaction.</p>
+      <p>
+        Our robot completed the course successfully and demonstrated line following, turning,
+        and obstacle interaction. This section will summarize run performance, consistency,
+        calibration challenges, and lessons learned during testing.
+      </p>
     </section>
 
-    <section>
+    <section id="video" class="card">
       <h2>Video Demo</h2>
-      <p><a href="https://youtu.be/V55OzWEsSkU" target="_blank">Watch the demo video</a></p>
+      <p>
+        <a href="https://youtu.be/V55OzWEsSkU" target="_blank" rel="noopener noreferrer">
+          Watch the demo video
+        </a>
+      </p>
     </section>
   </main>
 </body>
