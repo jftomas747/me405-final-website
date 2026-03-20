@@ -19,7 +19,18 @@
         <a href="hardware.html">Hardware</a>
         <a href="wiring.html">Wiring</a>
         <a href="diagrams.html">FSMs &amp; Diagrams</a>
-        <a class="active" href="code.html">Source Code</a>
+
+        <div class="nav-group">
+          <a class="active" href="code.html">Source Code</a>
+          <div class="sidebar-subnav">
+            <a href="#code-software-architecture">Code / Software Architecture</a>
+            <a href="#main-files-repository-structure">Main Files and Repository Structure</a>
+            <a href="#detailed-module-description">Detailed Module Description</a>
+            <a href="#task-timing-summary">Task Timing Summary</a>
+            <a href="#code-summary">Summary</a>
+          </div>
+        </div>
+
         <a href="results.html">Results</a>
         <a href="video.html">Video Demo</a>
       </nav>
@@ -31,7 +42,7 @@
         <p class="subtitle">Software organization, major modules, and repository links</p>
       </header>
 
-      <section class="doc-section">
+      <section class="doc-section" id="code-software-architecture">
         <h2>Code / Software Architecture</h2>
 
         <div class="stats">
@@ -66,7 +77,7 @@
         </p>
       </section>
 
-      <section class="doc-section">
+      <section class="doc-section" id="main-files-repository-structure">
         <h2>Main Files and Repository Structure</h2>
 
         <div class="code-grid">
@@ -192,7 +203,7 @@
         </p>
       </section>
 
-      <section class="doc-section">
+      <section class="doc-section" id="detailed-module-description">
         <h2>Detailed Module Description</h2>
 
         <h3>main.py</h3>
@@ -323,7 +334,7 @@
         </p>
       </section>
 
-      <section class="doc-section">
+      <section class="doc-section" id="task-timing-summary">
         <h2>Task Timing Summary</h2>
 
         <div class="table-wrap">
@@ -371,7 +382,7 @@
         </div>
       </section>
 
-      <section class="doc-section">
+      <section class="doc-section" id="code-summary">
         <h2>Summary</h2>
         <p>
           Our final codebase was organized around a modular cooperative-task structure. Low-level
