@@ -520,3 +520,23 @@ a:hover {
     padding: 10px 10px;
   }
 }
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.status-yes {
+  background: #eaf3e4;
+  color: var(--accent);
+  border: 1px solid #cfe0c2;
+}
+
+.status-no {
+  background: #fbeaea;
+  color: #9b2c2c;
+  border: 1px solid #e6bcbc;
+}
