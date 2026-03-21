@@ -556,6 +556,18 @@ a:hover {
   display: block;
 }
 
+.large-video {
+  max-width: 900px;
+}
+
+.video-caption {
+  max-width: 900px;
+  text-align: center;
+  font-style: italic;
+  color: var(--muted);
+  margin: -4px 0 0;
+}
+
 /* Responsive */
 
 @media (max-width: 900px) {
